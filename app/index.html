@@ -1,0 +1,109 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/sass-bootstrap/dist/css/bootstrap.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- xadmin -->
+    <script src="bower_components/jquery/jquery.js"></script>
+    <script type="text/javascript" src="vendor/jsi18n.js"></script>
+    <link href="vendor/bootstrap/css/bootstrap.css" type="text/css" media="screen" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" id="site-theme" href="vendor/xadmin/css/themes/bootstrap-xadmin.css" />
+
+    <link href="vendor/font-awesome/css/font-awesome.css" type="text/css" media="screen" rel="stylesheet" />
+    <link href="vendor/xadmin/css/xadmin.main.css" type="text/css" media="screen" rel="stylesheet" />
+    <link href="vendor/xadmin/css/xadmin.plugins.css" type="text/css" media="screen" rel="stylesheet" />
+    <link href="vendor/xadmin/css/xadmin.responsive.css" type="text/css" media="screen" rel="stylesheet" />
+    <link href="vendor/xadmin/css/xadmin.page.dashboard.css" type="text/css" media="screen" rel="stylesheet" />
+    <link href="vendor/select2/select2.css" type="text/css" media="screen" rel="stylesheet" />
+    <link href="vendor/selectize/selectize.css" type="text/css" media="screen" rel="stylesheet" />
+    <link href="vendor/selectize/selectize.bootstrap3.css" type="text/css" media="screen" rel="stylesheet" />
+    <link href="vendor/bootstrap-datepicker/css/datepicker.css" type="text/css" media="screen" rel="stylesheet" />
+    <link href="vendor/bootstrap-timepicker/css/bootstrap-timepicker.css" type="text/css" media="screen" rel="stylesheet" />
+    <link href="vendor/xadmin/css/xadmin.form.css" type="text/css" media="screen" rel="stylesheet" />
+    <!-- end xamdin -->
+
+    <!-- build:css({.tmp,app}) styles/main.css -->
+    <!-- <link rel="stylesheet" href="styles/main.css"> -->
+    <!-- endbuild -->
+  </head>
+  <body ng-app="uniAdminApp">
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <div top-nav></div>
+
+    <!-- Add your site or application content here -->
+    <div id="body-content" class="clearfix row">
+        <div id="left-side" class="col-sm-1 col-md-2">
+            <div site-menu></div>
+        </div>
+        <div id="content-block" class="col-sm-11 col-md-10">
+            <div ng-view=""></div>
+        </div>
+    </div>
+    <div footer></div>
+
+    <!--[if lt IE 9]>
+    <script src="bower_components/es5-shim/es5-shim.js"></script>
+    <script src="bower_components/json3/lib/json3.min.js"></script>
+    <![endif]-->
+
+    <!-- build:js scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/sass-bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- block xadmin -->
+    <script type="text/javascript" src="vendor/jquery-ui/jquery.ui.core.js"></script>
+    <script type="text/javascript" src="vendor/jquery-ui/jquery.ui.widget.js"></script>
+    <script type="text/javascript" src="vendor/jquery-ui/jquery.ui.mouse.js"></script>
+    <script type="text/javascript" src="vendor/jquery-ui/jquery.ui.sortable.js"></script>
+    <script type="text/javascript" src="vendor/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="vendor/xadmin/js/xadmin.main.js"></script>
+    <script type="text/javascript" src="vendor/xadmin/js/xadmin.responsive.js"></script>
+    <script type="text/javascript" src="vendor/jquery-ui/jquery.ui.effect.js"></script>
+    <script type="text/javascript" src="vendor/xadmin/js/xadmin.plugin.themes.js"></script>
+    <script type="text/javascript" src="vendor/xadmin/js/xadmin.page.dashboard.js"></script>
+    <script type="text/javascript" src="vendor/xadmin/js/xadmin.plugin.portal.js"></script>
+    <script type="text/javascript" src="vendor/flot/jquery.flot.js"></script>
+    <script type="text/javascript" src="vendor/flot/jquery.flot.pie.js"></script>
+    <script type="text/javascript" src="vendor/flot/jquery.flot.time.js"></script>
+    <script type="text/javascript" src="vendor/flot/jquery.flot.resize.js"></script>
+    <script type="text/javascript" src="vendor/xadmin/js/xadmin.plugin.charts.js"></script>
+    <script type="text/javascript" src="vendor/selectize/selectize.js"></script>
+    <script type="text/javascript" src="vendor/select2/select2.js"></script>
+    <script type="text/javascript" src="vendor/xadmin/js/xadmin.widget.select.js"></script>
+    <script type="text/javascript" src="vendor/xadmin/js/xadmin.plugin.quick-form.js"></script>
+    <script type="text/javascript" src="vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script type="text/javascript" src="vendor/xadmin/js/xadmin.widget.datetime.js"></script>
+    <script type="text/javascript" src="vendor/bootstrap-timepicker/js/bootstrap-timepicker.js"></script>
+    <script type="text/javascript" src="vendor/xadmin/js/xadmin.page.form.js"></script>
+    <!-- end xadmin -->
+
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="scripts/directives/index.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/controllers/main.js"></script>
+    <!-- endbuild -->
+</body>
+</html>

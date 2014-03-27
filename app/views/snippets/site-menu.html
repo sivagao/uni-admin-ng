@@ -1,0 +1,161 @@
+<div class="panel-group hide-sm nav-sitemenu col-md-2" id="nav-accordion">
+
+  <div class="panel panel-default" ng-repeat="item in _ctx._meta">
+    <div class="panel-heading">
+      <h6 class="panel-title">
+        <span class="badge badge-info">{{item.children.length}}</span>
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#nav-accordion" ng-href="#nav-panel-{{$index}}">
+          <i class="fa fa-fixed-width fa fa-briefcase" ng-class="item."></i>
+          {{item.val}}
+        </a>
+      </h6>
+    </div>
+    <div id="nav-panel-{{$index}}" class="list-group panel-collapse collapse">
+      <a ng-href="/category/{{item.key}}/resource/{{item1.key}}" class="list-group-item" ng-repeat="item1 in item.children">
+        <i class="fa fa-fixed-width fa fa-globe"></i>
+        {{item1.val}}
+      </a>
+    </div>
+  </div>
+
+</div>
+
+  <ul class="well nav nav-list nav-sitemenu show-sm">
+    <li class="app_menu">
+      <a href="/"><i class="fa fa-fixed-width fa fa-home"></i></a><hr>
+    </li>
+
+      <li class="app_menu dropdown-submenu ">
+        <a href="#" class="section">
+          <i class="fa fa-briefcase"></i>
+
+        </a><hr>
+        <ul class="dropdown-menu">
+
+          <li>
+            <a href="/app/continent/">
+            <i class="fa fa-fixed-width fa fa-globe"></i>
+            Continents</a>
+          </li>
+
+          <li>
+            <a href="/app/country/">
+            <i class="fa fa-fixed-width fa fa-flag"></i>
+            Countries</a>
+          </li>
+
+          <li>
+            <a href="/app/kitchensink/">
+            <i class="fa fa-fixed-width fa fa-briefcase"></i>
+            Kitchen sinks</a>
+          </li>
+
+        </ul>
+      </li>
+
+      <li class="app_menu dropdown-submenu ">
+        <a href="#" class="section">
+          <i class="fa fa-user"></i>
+
+        </a><hr>
+        <ul class="dropdown-menu">
+
+          <li>
+            <a href="/auth/group/">
+            <i class="fa fa-fixed-width fa fa-group"></i>
+            组</a>
+          </li>
+
+          <li>
+            <a href="/auth/permission/">
+            <i class="fa fa-fixed-width fa fa-lock"></i>
+            权限</a>
+          </li>
+
+          <li>
+            <a href="/auth/user/">
+            <i class="fa fa-fixed-width fa fa-user"></i>
+            用户</a>
+          </li>
+
+        </ul>
+      </li>
+
+      <li class="app_menu dropdown-submenu ">
+        <a href="#" class="section">
+          <i class="fa fa-comment"></i>
+
+        </a><hr>
+        <ul class="dropdown-menu">
+
+          <li>
+            <a href="/comments/comment/">
+            <i class="fa fa-fixed-width fa fa-comment"></i>
+            评论</a>
+          </li>
+
+        </ul>
+      </li>
+
+      <li class="app_menu dropdown-submenu ">
+        <a href="#" class="section">
+          <i class="fa fa-exclamation-sign"></i>
+        </a><hr>
+        <ul class="dropdown-menu">
+
+          <li>
+            <a href="/host/host/">
+            <i class="fa fa-fixed-width fa fa-exclamation-sign"></i>
+            Host</a>
+          </li>
+
+          <li>
+            <a href="/host/hostgroup/">
+            <i class="fa fa-fixed-width fa fa-exclamation-sign"></i>
+            Host Group</a>
+          </li>
+
+          <li>
+            <a href="/host/maintainlog/">
+            <i class="fa fa-fixed-width fa fa-exclamation-sign"></i>
+            Maintain Log</a>
+          </li>
+
+          <li>
+            <a href="/host/idc/">
+            <i class="fa fa-fixed-width fa fa-exclamation-sign"></i>
+            IDC</a>
+          </li>
+
+          <li>
+            <a href="/host/accessrecord/">
+            <i class="fa fa-fixed-width fa fa-exclamation-sign"></i>
+            Access Record</a>
+          </li>
+
+        </ul>
+      </li>
+
+      <li class="app_menu dropdown-submenu ">
+        <a href="#" class="section">
+          <i class="fa fa-file"></i>
+
+        </a><hr>
+        <ul class="dropdown-menu">
+
+          <li>
+            <a href="/reversion/revision/">
+            <i class="fa fa-fixed-width fa fa-exchange"></i>
+            Revisions</a>
+          </li>
+
+          <li>
+            <a href="/reversion/version/">
+            <i class="fa fa-fixed-width fa fa-file"></i>
+            Versions</a>
+          </li>
+
+        </ul>
+      </li>
+  </ul>
+

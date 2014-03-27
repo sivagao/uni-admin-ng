@@ -1,0 +1,750 @@
+
+<div breadcrumb>
+  <ul class="breadcrumb">
+    <li>
+      <a href="/">首页</a>
+    </li>
+    <li>
+      Host
+    </li>
+  </ul>
+</div>
+
+<div content-navbar>
+        <div class="navbar content-navbar navbar-default navbar-xs" data-toggle="breakpoint"
+          data-class-xs="navbar content-navbar navbar-inverse navbar-xs"
+          data-class-sm="navbar content-navbar navbar-default navbar-xs">
+          <div class="navbar-header">
+  <button class="navbar-toggle pull-left" data-toggle="class" data-target="#body-content" data-class-name="show_menu">
+    <i class="fa fa-list"></i>
+  </button>
+
+    <a href="/host/host/add/" class="navbar-toggle pull-right"><i class="fa fa-plus fa fa-white"></i></a>
+
+  <button class="navbar-toggle pull-right" data-toggle="collapse" data-target=".content-navbar .navbar-collapse">
+    <i class="fa fa-filter fa fa-white"></i>
+  </button>
+
+
+            <a class="navbar-brand" data-toggle="collapse" data-target="#top-nav .navbar-collapse">
+              Host
+            </a>
+          </div>
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+
+  <li class="dropdown bookmarks">
+    <a id="drop-bookmark" title="书签" class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">
+    <i class="fa fa-book"></i> 书签<span class="caret"></span></a>
+    <ul id="bookmark-menu" class="dropdown-menu" role="menu">
+
+
+      <li class="">
+        <a href="/host/host/?_cols=brand.guarantee_date.service_type&amp;_p_status__exact=2&amp;o=-guarantee_date" title="Need Guarantee"><i class="fa fa-bookmark"></i> Need Guarantee</a>
+
+      </li>
+
+      <li class="with_menu_btn">
+        <a href="/host/host/?_cols=brand.guarantee_date.service_type&amp;o=-guarantee_date" title="ss"><i class="fa fa-bookmark"></i> ss</a>
+
+          <a href="/xadmin/bookmark/7/update/" class="dropdown-menu-btn"><i class="fa fa-pencil"></i></a>
+
+      </li>
+
+      <li class="with_menu_btn">
+        <a href="/host/host/?_cols=brand.guarantee_date.service_type&amp;_p_guarantee_date__day=788&amp;o=-guarantee_date" title="Feel"><i class="fa fa-bookmark"></i> Feel</a>
+
+          <a href="/xadmin/bookmark/11/update/" class="dropdown-menu-btn"><i class="fa fa-pencil"></i></a>
+
+      </li>
+    </ul>
+  </li>
+
+  <div model-list-filter></div>
+</ul>
+
+
+  <form class="navbar-form navbar-left" action="" method="get">
+      <div class="input-group search-group">
+
+      <input id="searchbar" class="form-control" type="text" name="_q_" value="" placeholder="Search Host">
+      <span class="input-group-btn"><button class="btn btn-primary" type="submit"><i class="fa fa-search fa fa-white"></i></button></span>
+      </div>
+      <input type="hidden" name="_layout" value="table"/>
+  </form>
+
+
+            <div class="navbar-btn navbar-right hide-xs">
+
+
+
+      <a href="/host/host/add/" class="btn btn-primary"><i class="fa fa-plus fa fa-white"></i>
+      增加 Host</a>
+
+
+            </div>
+          </div>
+        </div>
+
+</div>
+
+
+
+
+
+<div content-toolbar>
+  <div class="content-toolbar btn-toolbar pull-right clearfix">
+
+  <div class="btn-group export">
+    <a class="dropdown-toggle btn btn-default btn-sm" data-toggle="dropdown" href="#">
+      <i class="fa fa-share"></i> 导出 <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+
+        <li><a data-toggle="modal" data-target="#export-modal-csv"><i class="fa fa-circle-arrow-down"></i> 导出 CSV</a></li>
+
+        <li><a data-toggle="modal" data-target="#export-modal-xml"><i class="fa fa-circle-arrow-down"></i> 导出 XML</a></li>
+
+        <li><a data-toggle="modal" data-target="#export-modal-json"><i class="fa fa-circle-arrow-down"></i> 导出 JSON</a></li>
+
+    </ul>
+
+
+      <div id="export-modal-csv" class="modal fade">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <form method="get" action="">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h4 class="modal-title">导出 CSV</h4>
+            </div>
+            <div class="modal-body">
+              <input type="hidden" name="_layout" value="table"><input type="hidden" name="_do_" value="export">
+              <input type="hidden" name="export_type" value="csv">
+                <label class="checkbox">
+
+
+                  <input type="checkbox" name="export_csv_header" checked="checked" value="on"> 导出表头
+
+
+
+                </label>
+                <label class="checkbox">
+                  <input type="checkbox" name="all" value="on"> 导出全部数据
+                </label>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+              <button class="btn btn-success" type="submit"><i class="fa fa-share"></i> 导出</button>
+            </div>
+            </form>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dalog -->
+      </div><!-- /.modal -->
+
+      <div id="export-modal-xml" class="modal fade">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <form method="get" action="">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h4 class="modal-title">导出 XML</h4>
+            </div>
+            <div class="modal-body">
+              <input type="hidden" name="_layout" value="table"><input type="hidden" name="_do_" value="export">
+              <input type="hidden" name="export_type" value="xml">
+                <label class="checkbox">
+
+
+
+                  <input type="checkbox" name="export_xml_format" checked="checked" value="on"> 导出格式
+
+
+                </label>
+                <label class="checkbox">
+                  <input type="checkbox" name="all" value="on"> 导出全部数据
+                </label>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+              <button class="btn btn-success" type="submit"><i class="fa fa-share"></i> 导出</button>
+            </div>
+            </form>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dalog -->
+      </div><!-- /.modal -->
+
+      <div id="export-modal-json" class="modal fade">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <form method="get" action="">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h4 class="modal-title">导出 JSON</h4>
+            </div>
+            <div class="modal-body">
+              <input type="hidden" name="_layout" value="table"><input type="hidden" name="_do_" value="export">
+              <input type="hidden" name="export_type" value="json">
+                <label class="checkbox">
+
+
+
+
+                  <input type="checkbox" name="export_json_format" checked="checked" value="on"> 导出格式
+
+                </label>
+                <label class="checkbox">
+                  <input type="checkbox" name="all" value="on"> 导出全部数据
+                </label>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+              <button class="btn btn-success" type="submit"><i class="fa fa-share"></i> 导出</button>
+            </div>
+            </form>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dalog -->
+      </div><!-- /.modal -->
+
+
+  </div>
+  <div class="btn-group grid-layout">
+    <a class="dropdown-toggle btn btn-default btn-sm" data-toggle="dropdown" href="#">
+      <i class="fa fa-table"></i> 布局 <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+
+        <li>
+        <a href="?_layout=thumbnails"><i class="fa fa-th-large"></i> 图标</a></li>
+
+        <li class="active">
+        <a href="?_layout=table"><i class="fa fa-table"></i> 表格</a></li>
+
+    </ul>
+  </div><div class="btn-group"><a class="btn btn-default btn-sm" href="/host/host/recover/"><i class="fa fa-trash"></i> 还原</a></div>
+
+      <div class="btn-group">
+        <a class="dropdown-toggle btn btn-default btn-sm" data-toggle="dropdown" href="#">
+          <i class="fa fa-list-alt"></i> 列 <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu model_fields pull-right" role="menu" aria-labelledby="dLabel">
+          <li><a href="?_layout=table"><i class="fa fa-refresh"></i> 恢复显示列</a></li>
+          <li class="divider"></li>
+
+          <li><a href="?_layout=table&amp;_cols=id.thumbnail_img.name.idc.guarantee_date.service_type.status.open_web.description">
+            <i class="fa fa-blank"></i>
+            ID</a></li>
+
+          <li><a href="?_layout=table&amp;_cols=thumbnail_img.name.guarantee_date.service_type.status.open_web.description">
+            <i class="fa fa-check"></i>
+            idc</a></li>
+
+          <li><a href="?_layout=table&amp;_cols=thumbnail_img.idc.guarantee_date.service_type.status.open_web.description">
+            <i class="fa fa-check"></i>
+            name</a></li>
+
+          <li><a href="?_layout=table&amp;_cols=thumbnail_img.name.idc.guarantee_date.service_type.status.open_web.description.nagios_name">
+            <i class="fa fa-blank"></i>
+            Nagios Host ID</a></li>
+
+          <li><a href="?_layout=table&amp;_cols=thumbnail_img.name.idc.guarantee_date.service_type.status.open_web.description.ip">
+            <i class="fa fa-blank"></i>
+            ip</a></li>
+
+          <li><a href="?_layout=table&amp;_cols=thumbnail_img.name.idc.guarantee_date.service_type.status.open_web.description.internal_ip">
+            <i class="fa fa-blank"></i>
+            internal ip</a></li>
+
+          <li><a href="?_layout=table&amp;_cols=thumbnail_img.name.idc.guarantee_date.service_type.status.open_web.description.user">
+            <i class="fa fa-blank"></i>
+            user</a></li>
+
+          <li><a href="?_layout=table&amp;_cols=thumbnail_img.name.idc.guarantee_date.service_type.status.open_web.description.password">
+            <i class="fa fa-blank"></i>
+            password</a></li>
+
+          <li><a href="?_layout=table&amp;_cols=thumbnail_img.name.idc.guarantee_date.service_type.status.open_web.description.ssh_port">
+            <i class="fa fa-blank"></i>
+            ssh port</a></li>
+
+          <li><a href="?_layout=table&amp;_cols=thumbnail_img.name.idc.guarantee_date.service_type.open_web.description">
+            <i class="fa fa-check"></i>
+            status</a></li>
+
+          <li><a href="?_layout=table&amp;_cols=thumbnail_img.name.idc.guarantee_date.service_type.status.open_web.description.brand">
+            <i class="fa fa-blank"></i>
+            brand</a></li>
+
+          <li><a href="?_layout=table&amp;_cols=thumbnail_img.name.idc.guarantee_date.service_type.status.open_web.description.model">
+            <i class="fa fa-blank"></i>
+            model</a></li>
+
+          <li><a href="?_layout=table&amp;_cols=thumbnail_img.name.idc.guarantee_date.service_type.status.open_web.description.cpu">
+            <i class="fa fa-blank"></i>
+            cpu</a></li>
+
+          <li><a href="?_layout=table&amp;_cols=thumbnail_img.name.idc.guarantee_date.service_type.status.open_web.description.core_num">
+            <i class="fa fa-blank"></i>
+            core num</a></li>
+
+          <li><a href="?_layout=table&amp;_cols=thumbnail_img.name.idc.guarantee_date.service_type.status.open_web.description.hard_disk">
+            <i class="fa fa-blank"></i>
+            hard disk</a></li>
+
+          <li><a href="?_layout=table&amp;_cols=thumbnail_img.name.idc.guarantee_date.service_type.status.open_web.description.memory">
+            <i class="fa fa-blank"></i>
+            memory</a></li>
+
+          <li><a href="?_layout=table&amp;_cols=thumbnail_img.name.idc.guarantee_date.service_type.status.open_web.description.system">
+            <i class="fa fa-blank"></i>
+            System OS</a></li>
+
+          <li><a href="?_layout=table&amp;_cols=thumbnail_img.name.idc.guarantee_date.service_type.status.open_web.description.system_version">
+            <i class="fa fa-blank"></i>
+            system version</a></li>
+
+          <li><a href="?_layout=table&amp;_cols=thumbnail_img.name.idc.guarantee_date.service_type.status.open_web.description.system_arch">
+            <i class="fa fa-blank"></i>
+            system arch</a></li>
+
+          <li><a href="?_layout=table&amp;_cols=thumbnail_img.name.idc.guarantee_date.service_type.status.open_web.description.create_time">
+            <i class="fa fa-blank"></i>
+            create time</a></li>
+
+          <li><a href="?_layout=table&amp;_cols=thumbnail_img.name.idc.service_type.status.open_web.description">
+            <i class="fa fa-check"></i>
+            guarantee date</a></li>
+
+          <li><a href="?_layout=table&amp;_cols=thumbnail_img.name.idc.guarantee_date.status.open_web.description">
+            <i class="fa fa-check"></i>
+            service type</a></li>
+
+          <li><a href="?_layout=table&amp;_cols=thumbnail_img.name.idc.guarantee_date.service_type.status.open_web">
+            <i class="fa fa-check"></i>
+            description</a></li>
+
+          <li><a href="?_layout=table&amp;_cols=thumbnail_img.name.idc.guarantee_date.service_type.status.description">
+            <i class="fa fa-check"></i>
+            Acts</a></li>
+
+          <li><a href="?_layout=table&amp;_cols=name.idc.guarantee_date.service_type.status.open_web.description">
+            <i class="fa fa-check"></i>
+            TImg</a></li>
+
+        </ul>
+      </div>
+
+
+      <div class="btn-group layout-btns" data-toggle="buttons">
+        <label class="btn btn-default btn-sm layout-normal active">
+          <input type="radio"> <i class="fa fa-th-large"></i>
+        </label>
+        <label class="btn btn-default btn-sm layout-condensed">
+          <input type="radio"> <i class="fa fa-th"></i>
+        </label>
+
+      </div>
+
+
+      <div class="btn-group layout-btns" data-toggle="buttons-checkbox">
+        <button type="button" class="btn btn-default btn-sm layout-full"><i class="fa fa-fullscreen"></i></button>
+
+      </div>
+
+
+    </div>
+</div>
+
+<div list-pagination>
+  <ul class="pagination pagination-sm pagination-left pagination-inline">
+    <li><span><span class="text-success">2</span> Host</span></li>
+    </ul>
+</div>
+
+
+<div resource-list>
+  <form id="changelist-form" action="" method="post"><input type="hidden" name="csrfmiddlewaretoken" value="KSc9qzyeptn0v2BFCbiy60AL7iAdYHG9">
+
+    <div class="results table-responsive">
+
+
+    <table class="table table-bordered table-striped table-hover">
+
+      <thead>
+        <tr>
+          <th scope="col" class="action-checkbox-column">
+
+
+              <input type="checkbox" id="action-toggle">
+
+          </th>
+          <th scope="col">
+
+
+              TImg
+
+          </th>
+          <th scope="col" class="sortable">
+
+
+              <div class="dropdown pull-left">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                  name
+                </a>
+                <ul class="dropdown-menu" role="menu">
+
+                    <li><a href="?_layout=table&amp;o=name" class="active"><i class="fa fa-caret-up"></i> 正序</a></li>
+
+                    <li><a href="?_layout=table&amp;o=-name" class="active"><i class="fa fa-caret-down"></i> 倒序</a></li>
+
+                </ul>
+              </div>
+
+          </th>
+          <th scope="col" class="sortable">
+
+
+              <div class="dropdown pull-left">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                  idc
+                </a>
+                <ul class="dropdown-menu" role="menu">
+
+                    <li><a href="?_layout=table&amp;o=idc" class="active"><i class="fa fa-caret-up"></i> 正序</a></li>
+
+                    <li><a href="?_layout=table&amp;o=-idc" class="active"><i class="fa fa-caret-down"></i> 倒序</a></li>
+
+                </ul>
+              </div>
+
+          </th>
+          <th scope="col" class="sortable">
+
+
+              <div class="dropdown pull-left">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                  guarantee date
+                </a>
+                <ul class="dropdown-menu" role="menu">
+
+                    <li><a href="?_layout=table&amp;o=guarantee_date" class="active"><i class="fa fa-caret-up"></i> 正序</a></li>
+
+                    <li><a href="?_layout=table&amp;o=-guarantee_date" class="active"><i class="fa fa-caret-down"></i> 倒序</a></li>
+
+                </ul>
+              </div>
+
+          </th>
+          <th scope="col" class="sortable">
+
+
+              <div class="dropdown pull-left">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                  service type
+                </a>
+                <ul class="dropdown-menu" role="menu">
+
+                    <li><a href="?_layout=table&amp;o=service_type" class="active"><i class="fa fa-caret-up"></i> 正序</a></li>
+
+                    <li><a href="?_layout=table&amp;o=-service_type" class="active"><i class="fa fa-caret-down"></i> 倒序</a></li>
+
+                </ul>
+              </div>
+
+          </th>
+          <th scope="col" class="sortable">
+
+
+              <div class="dropdown pull-left">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                  status
+                </a>
+                <ul class="dropdown-menu" role="menu">
+
+                    <li><a href="?_layout=table&amp;o=status" class="active"><i class="fa fa-caret-up"></i> 正序</a></li>
+
+                    <li><a href="?_layout=table&amp;o=-status" class="active"><i class="fa fa-caret-down"></i> 倒序</a></li>
+
+                </ul>
+              </div>
+
+          </th>
+          <th scope="col">
+
+
+              Acts
+
+          </th>
+          <th scope="col" class="sortable">
+
+
+              <div class="dropdown pull-left">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                  description
+                </a>
+                <ul class="dropdown-menu" role="menu">
+
+                    <li><a href="?_layout=table&amp;o=description" class="active"><i class="fa fa-caret-up"></i> 正序</a></li>
+
+                    <li><a href="?_layout=table&amp;o=-description" class="active"><i class="fa fa-caret-down"></i> 倒序</a></li>
+
+                </ul>
+              </div>
+
+          </th>
+          <th scope="col">
+
+
+              &nbsp;
+
+          </th>
+        </tr>
+
+      </thead>
+
+
+      <tbody>
+
+        <tr class="grid-item">
+          <td class="action-checkbox">
+
+
+              <input class="action-select" name="_selected_action" type="checkbox" value="3">
+
+          </td>
+
+          <td>
+
+
+              <img src="http://js.wiyun.com/site_media/images/wallpaper/eac1bce7-90d5-40a7-a7e2-ae02acca2e86_jpg_152x102_crop_upscale_q85.jpg">
+
+          </td>
+
+          <td>
+
+              <div class="btn-group pull-right">
+
+                  <a class="editable-handler" title="" data-editable-field="name" data-editable-loadurl="/host/host/3/patch/?fields=name" data-original-title="输入name"><i class="fa fa-edit"></i></a>
+
+              </div>
+
+
+              <a href="/host/host/3/update/"><span class="editable-field">test2</span></a>
+
+          </td>
+
+          <td class="nowrap">
+
+              <div class="btn-group pull-right">
+
+                  <a class="editable-handler" title="" data-editable-field="idc" data-editable-loadurl="/host/host/3/patch/?fields=idc" data-original-title="输入idc"><i class="fa fa-edit"></i></a>
+
+                  <a data-res-uri="/host/idc/1/detail/" data-edit-uri="/host/idc/1/update/" class="details-handler" rel="tooltip" title="IDC详情"><i class="fa fa-info-sign"></i></a>
+
+              </div>
+
+
+              <span class="editable-field">IDC</span>
+
+          </td>
+
+          <td class="nowrap">
+
+              <div class="btn-group pull-right">
+
+                  <a class="editable-handler" title="" data-editable-field="guarantee_date" data-editable-loadurl="/host/host/3/patch/?fields=guarantee_date" data-original-title="输入guarantee date"><i class="fa fa-edit"></i></a>
+
+              </div>
+
+
+              <span class="editable-field">2014-03-04</span>
+
+          </td>
+
+          <td>
+
+              <div class="btn-group pull-right">
+
+                  <a class="editable-handler" title="" data-editable-field="service_type" data-editable-loadurl="/host/host/3/patch/?fields=service_type" data-original-title="输入service type"><i class="fa fa-edit"></i></a>
+
+              </div>
+
+
+              <span class="editable-field">Database</span>
+
+          </td>
+
+          <td>
+
+
+              Down
+
+          </td>
+
+          <td>
+
+
+              <a href="http://127.0.0.1" target="_blank">Open</a>
+
+          </td>
+
+          <td>
+
+              <div class="btn-group pull-right">
+
+                  <a class="editable-handler" title="" data-editable-field="description" data-editable-loadurl="/host/host/3/patch/?fields=description" data-original-title="输入description"><i class="fa fa-edit"></i></a>
+
+              </div>
+
+
+              <span class="editable-field">aa</span>
+
+          </td>
+
+          <td>
+
+
+              <div class="dropdown related_menu pull-right"><a title="关联数据" class="relate_menu dropdown-toggle" data-toggle="dropdown"><i class="icon fa fa-list"></i></a><ul class="dropdown-menu" role="menu"><li class="with_menu_btn"><a href="/host/maintainlog/?_rel_host__id__exact=3" title="Maintain Log"><i class="icon fa fa-th-list"></i> Maintain Log</a><a class="add_link dropdown-menu-btn" href="/host/maintainlog/add/?_rel_host__id__exact=3"><i class="icon fa fa-plus pull-right"></i></a></li><li class="with_menu_btn"><a href="/host/hostgroup/?_rel_hosts__id__exact=3" title="Host Group"><i class="icon fa fa-th-list"></i> Host Group</a><a class="add_link dropdown-menu-btn" href="/host/hostgroup/add/?_rel_hosts__id__exact=3"><i class="icon fa fa-plus pull-right"></i></a></li></ul></div>
+
+          </td>
+        </tr>
+
+
+        <tr class="grid-item">
+          <td class="action-checkbox">
+
+
+              <input class="action-select" name="_selected_action" type="checkbox" value="1">
+
+          </td>
+
+          <td>
+
+
+              <img src="http://js.wiyun.com/site_media/images/wallpaper/eac1bce7-90d5-40a7-a7e2-ae02acca2e86_jpg_152x102_crop_upscale_q85.jpg">
+
+          </td>
+
+          <td>
+
+              <div class="btn-group pull-right">
+
+                  <a class="editable-handler" title="" data-editable-field="name" data-editable-loadurl="/host/host/1/patch/?fields=name" data-original-title="输入name"><i class="fa fa-edit"></i></a>
+
+              </div>
+
+
+              <a href="/host/host/1/update/"><span class="editable-field">shoot</span></a>
+
+          </td>
+
+          <td class="nowrap">
+
+              <div class="btn-group pull-right">
+
+                  <a class="editable-handler" title="" data-editable-field="idc" data-editable-loadurl="/host/host/1/patch/?fields=idc" data-original-title="输入idc"><i class="fa fa-edit"></i></a>
+
+                  <a data-res-uri="/host/idc/1/detail/" data-edit-uri="/host/idc/1/update/" class="details-handler" rel="tooltip" title="IDC详情"><i class="fa fa-info-sign"></i></a>
+
+              </div>
+
+
+              <span class="editable-field">IDC</span>
+
+          </td>
+
+          <td class="nowrap">
+
+              <div class="btn-group pull-right">
+
+                  <a class="editable-handler" title="" data-editable-field="guarantee_date" data-editable-loadurl="/host/host/1/patch/?fields=guarantee_date" data-original-title="输入guarantee date"><i class="fa fa-edit"></i></a>
+
+              </div>
+
+
+              <span class="editable-field">2014-03-06</span>
+
+          </td>
+
+          <td>
+
+              <div class="btn-group pull-right">
+
+                  <a class="editable-handler" title="" data-editable-field="service_type" data-editable-loadurl="/host/host/1/patch/?fields=service_type" data-original-title="输入service type"><i class="fa fa-edit"></i></a>
+
+              </div>
+
+
+              <span class="editable-field">LVS</span>
+
+          </td>
+
+          <td>
+
+
+              Down
+
+          </td>
+
+          <td>
+
+
+              <a href="http://1.1.1.1" target="_blank">Open</a>
+
+          </td>
+
+          <td>
+
+              <div class="btn-group pull-right">
+
+                  <a class="editable-handler" title="" data-editable-field="description" data-editable-loadurl="/host/host/1/patch/?fields=description" data-original-title="输入description"><i class="fa fa-edit"></i></a>
+
+              </div>
+
+
+              <span class="editable-field">sefwerwerw</span>
+
+          </td>
+
+          <td>
+
+
+              <div class="dropdown related_menu pull-right"><a title="关联数据" class="relate_menu dropdown-toggle" data-toggle="dropdown"><i class="icon fa fa-list"></i></a><ul class="dropdown-menu" role="menu"><li class="with_menu_btn"><a href="/host/maintainlog/?_rel_host__id__exact=1" title="Maintain Log"><i class="icon fa fa-th-list"></i> Maintain Log</a><a class="add_link dropdown-menu-btn" href="/host/maintainlog/add/?_rel_host__id__exact=1"><i class="icon fa fa-plus pull-right"></i></a></li><li class="with_menu_btn"><a href="/host/hostgroup/?_rel_hosts__id__exact=1" title="Host Group"><i class="icon fa fa-th-list"></i> Host Group</a><a class="add_link dropdown-menu-btn" href="/host/hostgroup/add/?_rel_hosts__id__exact=1"><i class="icon fa fa-plus pull-right"></i></a></li></ul></div>
+
+          </td>
+        </tr>
+
+
+      </tbody>
+
+    </table>
+
+
+    </div>
+
+  <div class="form-actions well well-sm">
+    <input type="hidden" id="action" name="action" value="">
+    <input type="hidden" id="select-across" name="select_across" value="0">
+    <div class="btn-group clearfix dropup">
+      <a class="dropdown-toggle btn btn-success" data-toggle="dropdown" href="#">
+      <i class="fa fa-wrench fa fa-white"></i>
+      <span class="action-counter">选中了 2 个中的 0 个</span>
+      <span class="all" style="display: none;">选中了 2 个</span>
+      <span class="caret"></span></a>
+      <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+
+          <li><a onclick="$.do_action('delete_selected');"><i class="fa fa-remove"></i> Delete selected Host</a></li>
+
+          <li><a onclick="$.do_action('change_selected');"><i class="fa fa-tasks"></i> 批量修改选择的Host</a></li>
+
+      </ul>
+    </div>
+
+
+        <script type="text/javascript">var _actions_icnt="2";</script>
+
+  </div>
+
+    </form>
+</div>
+

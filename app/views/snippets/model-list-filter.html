@@ -1,0 +1,356 @@
+<li class="dropdown">
+  <a id="drop-filter" class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">
+  <i class="fa fa-filter"></i> 过滤器
+  <span class="caret"></span></a>
+  <ul id="filter-menu" class="dropdown-menu" role="menu" aria-labelledby="drop-filter">
+    <li class="dropdown-submenu filter-fk-search">
+      <a><i class="fa fa-filter text-muted"></i> idc</a>
+      <div class="popover right">
+        <div class="arrow"></div>
+        <h3 class="popover-title">
+          搜索 idc
+        </h3>
+        <div class="popover-content">
+          <form class="exform" method="get" action="">
+            <input type="hidden" name="_layout" value="table"/>
+              <input name="_p_idc__id__exact" class="select-search" type="hidden" value=""
+              data-search-url="/host/idc/" data-label=" " data-choices="?"
+              data-placeholder="搜索 idc…"/>
+
+              <button type="submit" class="btn btn-success">应用</button>
+
+          </form>
+        </div>
+      </div>
+    </li>
+    <li class="dropdown-submenu filter-date">
+      <a><i class="fa fa-filter text-muted"></i> guarantee date</a>
+      <ul class="dropdown-menu">
+
+          <li class="active">
+          <a href="?_layout=table">任意日期</a></li>
+
+          <li>
+          <a href="?_p_guarantee_date__isnull=False&amp;_layout=table">有日期</a></li>
+
+          <li>
+          <a href="?_p_guarantee_date__isnull=True&amp;_layout=table">无日期</a></li>
+
+          <li>
+          <a href="?_p_guarantee_date__gte=2014-03-27&amp;_layout=table&amp;_p_guarantee_date__lt=2014-03-28">今天</a></li>
+
+          <li>
+          <a href="?_p_guarantee_date__gte=2014-03-20&amp;_layout=table&amp;_p_guarantee_date__lt=2014-03-28">过去7天</a></li>
+
+          <li>
+          <a href="?_p_guarantee_date__gte=2014-03-01&amp;_layout=table&amp;_p_guarantee_date__lt=2014-03-28">本月</a></li>
+
+          <li>
+          <a href="?_p_guarantee_date__gte=2014-01-01&amp;_layout=table&amp;_p_guarantee_date__lt=2014-03-28">今年</a></li>
+
+        <li class="dropdown-submenu menu-choice-date">
+          <a>选择日期</a>
+          <div class="popover right">
+            <div class="arrow"></div>
+            <h3 class="popover-title">选择日期</h3>
+            <div class="popover-content">
+              <form method="get" action="" class="form-inline">
+                <input type="hidden" name="_layout" value="table"/>
+                <div class="input-group">
+                <span class="input-group-addon">年</span>
+                <input name="_p_guarantee_date__year" class="choice-year form-control" type="text" placeholder="年" size="4" value="">
+                </div>
+                <div class="input-group">
+                <span class="input-group-addon">月</span>
+                <input name="_p_guarantee_date__month" class="choice-month form-control" type="text" placeholder="月" size="2" value="">
+                </div>
+                <div class="input-group">
+                <span class="input-group-addon">日</span>
+                <input name="_p_guarantee_date__day" class="choice-day form-control" type="text" placeholder="日" size="2" value="">
+                </div>
+                <button class="btn btn-success btn-block" type="submit">应用</button>
+              </form>
+            </div>
+          </div>
+        </li>
+        <li class="dropdown-submenu menu-date-range"><a>日期范围</a>
+          <div class="popover bottom">
+            <div class="arrow"></div>
+            <div class="popover-content row">
+            <form method="get" action="" class="clearfix">
+              <div class="ranges col-sm-3 hide-xs">
+                <fieldset class="range_inputs">
+                  <h4>选择日期</h4>
+                  <label for="_p_guarantee_date__gte">从</label>
+                  <input class="form-control start_input" type="text" name="_p_guarantee_date__gte" value="" />
+                  <label for="_p_guarantee_date__lt">到</label>
+                  <input class="form-control end_input" type="text" name="_p_guarantee_date__lt" value="" />
+                  <button type="submit" class="btn btn-success btn-block">应用</button>
+                </fieldset>
+              </div>
+              <div class="col-sm-9">
+                <div class="calendar date-start col-sm-6" data-date=""></div>
+                <div class="calendar date-end col-sm-6" data-date=""></div>
+              </div>
+              <div class="col-xs-12">
+                <button type="submit" class="btn btn-success btn-block show-xs">应用</button>
+              </div>
+              <input type="hidden" name="_layout" value="table"/>
+            </form>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </li>
+    <li class="dropdown-submenu">
+      <a><i class="fa fa-filter text-muted"></i> status</a>
+      <ul class="dropdown-menu">
+
+            <li class="active">
+            <a href="?_layout=table">全部</a></li>
+
+            <li>
+            <a href="?_p_status__exact=0&amp;_layout=table">Normal</a></li>
+
+            <li>
+            <a href="?_p_status__exact=1&amp;_layout=table">Down</a></li>
+
+            <li>
+            <a href="?_p_status__exact=2&amp;_layout=table">No Connect</a></li>
+
+            <li>
+            <a href="?_p_status__exact=3&amp;_layout=table">Error</a></li>
+
+      </ul>
+    </li>
+    <li class="dropdown-submenu">
+      <a><i class="fa fa-filter text-muted"></i> brand</a>
+      <ul class="dropdown-menu">
+
+            <li class="active">
+            <a href="?_layout=table">全部</a></li>
+
+            <li>
+            <a href="?_p_brand__exact=DELL&amp;_layout=table">DELL</a></li>
+
+            <li>
+            <a href="?_p_brand__exact=HP&amp;_layout=table">HP</a></li>
+
+            <li>
+            <a href="?_p_brand__exact=Other&amp;_layout=table">Other</a></li>
+
+      </ul>
+    </li>
+    <li class="dropdown-submenu filter-char">
+      <a><i class="fa fa-filter text-muted"></i> model</a>
+      <div class="popover right">
+        <div class="arrow"></div>
+        <h3 class="popover-title">
+          搜索 model
+        </h3>
+        <div class="popover-content">
+          <form method="get" action="">
+            <input type="hidden" name="_layout" value="table"/>
+            <div class="input-group">
+              <input name="_p_model__contains" class="input-char form-control" type="text" value="" placeholder="输入 model…"/>
+              <span class="input-group-btn">
+
+                <button class="btn btn-success" type="submit"><i class="fa fa-search fa fa-white"></i></button>
+              </span>
+            </div>
+          </form>
+        </div>
+      </div>
+    </li>
+    <li class="dropdown-submenu filter-char">
+      <a><i class="fa fa-filter text-muted"></i> cpu</a>
+      <div class="popover right">
+        <div class="arrow"></div>
+        <h3 class="popover-title">
+          搜索 cpu
+        </h3>
+        <div class="popover-content">
+          <form method="get" action="">
+            <input type="hidden" name="_layout" value="table"/>
+            <div class="input-group">
+              <input name="_p_cpu__contains" class="input-char form-control" type="text" value="" placeholder="输入 cpu…"/>
+              <span class="input-group-btn">
+
+                <button class="btn btn-success" type="submit"><i class="fa fa-search fa fa-white"></i></button>
+              </span>
+            </div>
+          </form>
+        </div>
+      </div>
+    </li>
+    <li class="dropdown-submenu">
+      <a><i class="fa fa-filter text-muted"></i> core num</a>
+      <ul class="dropdown-menu">
+
+            <li class="active">
+            <a href="?_layout=table">全部</a></li>
+
+            <li>
+            <a href="?_p_core_num__exact=2&amp;_layout=table">2 Cores</a></li>
+
+            <li>
+            <a href="?_p_core_num__exact=4&amp;_layout=table">4 Cores</a></li>
+
+            <li>
+            <a href="?_p_core_num__exact=6&amp;_layout=table">6 Cores</a></li>
+
+            <li>
+            <a href="?_p_core_num__exact=8&amp;_layout=table">8 Cores</a></li>
+
+            <li>
+            <a href="?_p_core_num__exact=10&amp;_layout=table">10 Cores</a></li>
+
+            <li>
+            <a href="?_p_core_num__exact=12&amp;_layout=table">12 Cores</a></li>
+
+            <li>
+            <a href="?_p_core_num__exact=14&amp;_layout=table">14 Cores</a></li>
+
+            <li>
+            <a href="?_p_core_num__exact=16&amp;_layout=table">16 Cores</a></li>
+
+            <li>
+            <a href="?_p_core_num__exact=18&amp;_layout=table">18 Cores</a></li>
+
+            <li>
+            <a href="?_p_core_num__exact=20&amp;_layout=table">20 Cores</a></li>
+
+            <li>
+            <a href="?_p_core_num__exact=22&amp;_layout=table">22 Cores</a></li>
+
+            <li>
+            <a href="?_p_core_num__exact=24&amp;_layout=table">24 Cores</a></li>
+
+            <li>
+            <a href="?_p_core_num__exact=26&amp;_layout=table">26 Cores</a></li>
+
+            <li>
+            <a href="?_p_core_num__exact=28&amp;_layout=table">28 Cores</a></li>
+
+      </ul>
+    </li>
+    <li class="dropdown-submenu filter-number">
+      <a><i class="fa fa-filter text-muted"></i> hard disk</a>
+      <div class="popover right">
+        <div class="arrow"></div>
+        <h3 class="popover-title">
+          搜索 hard disk
+        </h3>
+        <div class="popover-content">
+          <form method="get" action="">
+            <input type="hidden" name="_layout" value="table"/>
+              <div class="input-group">
+                <span class="input-group-addon">=</span>
+                <span class="input-group-btn">
+                  <a class="btn btn-default toggle" data-toggle="button" data-off-name="_p_hard_disk__exact" data-on-name="_p_hard_disk__ne">!</a>
+                </span>
+                <input name="_p_hard_disk__exact" class="form-control" type="number" value="" placeholder="输入数字"/>
+                <span class="input-group-btn"><a class="btn btn-default remove">x</a></span>
+              </div>
+              <div class="input-group">
+                <span class="input-group-addon">></span>
+                <span class="input-group-btn">
+                  <a class="btn btn-default toggle" data-toggle="button" data-off-name="_p_hard_disk__gt" data-on-name="_p_hard_disk__gte">=</a>
+                </span>
+                <input name="_p_hard_disk__gt" class="form-control" type="number" value="" placeholder="输入数字"/>
+                <span class="input-group-btn"><a class="btn btn-default remove">x</a></span>
+              </div>
+              <div class="input-group">
+                <span class="input-group-addon"><</span>
+                <span class="input-group-btn">
+                  <a class="btn btn-default toggle" data-toggle="button" data-off-name="_p_hard_disk__lt" data-on-name="_p_hard_disk__lte">=</a>
+                </span>
+                <input name="_p_hard_disk__lt" class="form-control" type="number" value="" placeholder="输入数字"/>
+                <span class="input-group-btn"><a class="btn btn-default remove">x</a></span>
+              </div>
+
+              <button type="submit" class="btn btn-success">应用</button>
+
+          </form>
+        </div>
+      </div>
+    </li>
+    <li class="dropdown-submenu filter-number">
+      <a><i class="fa fa-filter text-muted"></i> memory</a>
+      <div class="popover right">
+        <div class="arrow"></div>
+        <h3 class="popover-title">
+          搜索 memory
+        </h3>
+        <div class="popover-content">
+          <form method="get" action="">
+            <input type="hidden" name="_layout" value="table"/>
+              <div class="input-group">
+                <span class="input-group-addon">=</span>
+                <span class="input-group-btn">
+                  <a class="btn btn-default toggle" data-toggle="button" data-off-name="_p_memory__exact" data-on-name="_p_memory__ne">!</a>
+                </span>
+                <input name="_p_memory__exact" class="form-control" type="number" value="" placeholder="输入数字"/>
+                <span class="input-group-btn"><a class="btn btn-default remove">x</a></span>
+              </div>
+              <div class="input-group">
+                <span class="input-group-addon">></span>
+                <span class="input-group-btn">
+                  <a class="btn btn-default toggle" data-toggle="button" data-off-name="_p_memory__gt" data-on-name="_p_memory__gte">=</a>
+                </span>
+                <input name="_p_memory__gt" class="form-control" type="number" value="" placeholder="输入数字"/>
+                <span class="input-group-btn"><a class="btn btn-default remove">x</a></span>
+              </div>
+              <div class="input-group">
+                <span class="input-group-addon"><</span>
+                <span class="input-group-btn">
+                  <a class="btn btn-default toggle" data-toggle="button" data-off-name="_p_memory__lt" data-on-name="_p_memory__lte">=</a>
+                </span>
+                <input name="_p_memory__lt" class="form-control" type="number" value="" placeholder="输入数字"/>
+                <span class="input-group-btn"><a class="btn btn-default remove">x</a></span>
+              </div>
+
+              <button type="submit" class="btn btn-success">应用</button>
+
+          </form>
+        </div>
+      </div>
+    </li>
+    <li class="dropdown-submenu">
+      <a><i class="fa fa-filter text-muted"></i> service type</a>
+      <ul class="dropdown-menu">
+
+            <li class="active">
+            <a href="?_layout=table">全部</a></li>
+
+            <li>
+            <a href="?_p_service_type__exact=moniter&amp;_layout=table">Moniter</a></li>
+
+            <li>
+            <a href="?_p_service_type__exact=lvs&amp;_layout=table">LVS</a></li>
+
+            <li>
+            <a href="?_p_service_type__exact=db&amp;_layout=table">Database</a></li>
+
+            <li>
+            <a href="?_p_service_type__exact=analysis&amp;_layout=table">Analysis</a></li>
+
+            <li>
+            <a href="?_p_service_type__exact=admin&amp;_layout=table">Admin</a></li>
+
+            <li>
+            <a href="?_p_service_type__exact=storge&amp;_layout=table">Storge</a></li>
+
+            <li>
+            <a href="?_p_service_type__exact=web&amp;_layout=table">WEB</a></li>
+
+            <li>
+            <a href="?_p_service_type__exact=email&amp;_layout=table">Email</a></li>
+
+            <li>
+            <a href="?_p_service_type__exact=mix&amp;_layout=table">Mix</a></li>
+
+      </ul>
+    </li>
+  </ul>
+  </li>
