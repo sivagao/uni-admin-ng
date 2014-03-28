@@ -12,12 +12,16 @@ angular.module('uniAdminApp', [
         var noop = function() {};
         $routeProvider
             .when('/', {
-                templateUrl: '/views/main.html',
-                controller: 'MainCtrl'
+                templateUrl: '/views/home.html',
+                controller: 'homeCtrl'
             })
             .when('/category/:app/resource/:resource', {
                 templateUrl: '/views/model-list.html',
-                controller: 'MainCtrl'
+                controller: 'ModelListCtrl'
+            })
+            .when('/category/:app', {
+                templateUrl: '/views/model-list.html',
+                controller: 'AppCtrl'
             })
             .when('/#:partial', {
                 // TO FIX
@@ -26,8 +30,8 @@ angular.module('uniAdminApp', [
             .otherwise({
                 redirectTo: '/'
             });
-    }).run(function($rootScope) {
-        $rootScope.$on('$routeChangeSuccess', function(scope, next, current) {
+    }).run(function($rootScope, $timeout) {
+        $timeout(function() {
             (function($) {
                 $.fn.exform = function() {
                     this.each(function() {
@@ -88,13 +92,6 @@ angular.module('uniAdminApp', [
                     $(target).toggleClass(className)
                 })
 
-                // loading btn
-                // $('.btn.btn-loading,.btn[type=submit]')
-                //   .click(function () {
-                //     var btn = $(this)
-                //     btn.button('loading')
-                //   })
-
                 //.nav-content bar nav-menu
                 $('.navbar-xs .navbar-nav > li')
                     .on('shown.bs.dropdown', function(e) {
@@ -138,5 +135,8 @@ angular.module('uniAdminApp', [
                     });
                 }
             })(jQuery);
+        });
+        $rootScope.$on('$routeChangeSuccess', function(scope, next, current) {
+
         });
     });

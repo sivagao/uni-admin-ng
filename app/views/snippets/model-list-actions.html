@@ -1,0 +1,18 @@
+<div class="form-actions well well-sm">
+  <input type="hidden" id="action" name="action" value="">
+  <input type="hidden" id="select-across" name="select_across" value="0">
+  <div class="btn-group clearfix dropup">
+    <a class="dropdown-toggle btn btn-success" data-toggle="dropdown" href="#">
+    <i class="fa fa-wrench fa fa-white"></i>
+    <span class="action-counter">选中了 2 个中的 0 个</span>
+    <span class="all" style="display: none;">选中了 2 个</span>
+    <span class="caret"></span></a>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+
+        <li><a onclick="$.do_action('delete_selected');"><i class="fa fa-remove"></i> Delete selected Host</a></li>
+
+        <li><a onclick="$.do_action('change_selected');"><i class="fa fa-tasks"></i> 批量修改选择的Host</a></li>
+    </ul>
+  </div>
+      <script type="text/javascript">var _actions_icnt="2";</script>
+</div>
