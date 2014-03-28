@@ -3,7 +3,11 @@
   <i class="fa fa-filter"></i> 过滤器
   <span class="caret"></span></a>
   <ul id="filter-menu" class="dropdown-menu" role="menu" aria-labelledby="drop-filter">
-    <li class="dropdown-submenu" ng-repeat="$field in _fields" class="filter-{{$field.type}}" ng-switch on="$field.type">
+    <li class="dropdown-submenu"
+      ng-repeat="$field in _fields"
+      class="filter-{{$field.type}}"
+      ng-switch on="$field.type"
+      ng-class="{'filter-multiselect': $field.type === 'multiselect'}">
       <a><i class="fa fa-filter text-muted"></i> {{$field.name}}</a>
       <div class="popover right" ng-switch-when="number">
         <div class="arrow"></div>
@@ -61,6 +65,11 @@
         <li><a href="?_p_status__exact=3&amp;_layout=table" ng-repeat="$choice in $field.choices">{{$choice.val}}</a></li>
       </ul>
       <ul class="dropdown-menu" ng-switch-when="date">
+        <li class="active"><a href="?">Any date</a></li>
+        <li><a href="#">Today</a></li>
+        <li><a href="?_p_guarantee_date__gte=2014-03-21&amp;_p_guarantee_date__lt=2014-03-29">Past 7 days</a></li>
+        <li><a href="#">This month</a></li>
+        <li><a href="#">This year</a></li>
         <li class="dropdown-submenu menu-choice-date">
           <a>选择日期</a>
           <div class="popover right">
@@ -113,6 +122,14 @@
             </div>
           </div>
         </li>
+      </ul>
+      <ul class="dropdown-menu" ng-switch-when="multiselect">
+            <li class="active">
+              <a href="">
+                <input type="checkbox" checked="checked">
+                All
+              </a>
+            </li>
       </ul>
     </li>
   </ul>

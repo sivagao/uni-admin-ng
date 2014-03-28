@@ -201,18 +201,48 @@ angular.module('uniAdmin.directives', [
         templateUrl: '/views/snippets/model-list-actions.html',
         link: function(scope, elem, filter) {}
     }
-}).directive('modelListThead', function($timeout) {
+}).directive('modelListThead', function($timeout, $rootScope) {
     return {
         templateUrl: '/views/snippets/model-list-thead.html',
+        controller: function($scope) {
+            $scope.cancelSort = function() {
+                this.$field.sortDown = false;
+                this.$field.sortUp = false;
+            };
+        },
         link: function(scope, elem, filter) {
-
+            scope._fields = $rootScope._ctx._fields;
+            $timeout(function() {
+                elem.find('.fa-caret-up, .fa-caret-down').parents('li').click(function() {
+                    var _scope = angular.element(this).scope();
+                    if ($(this).find('.fa-caret-up').length) {
+                        _scope.$field.sortUp = true;
+                        _scope.$field.sortDown = false;
+                    } else {
+                        _scope.$field.sortDown = true;
+                        _scope.$field.sortUp = false;
+                    }
+                    _scope.$apply();
+                });
+                elem.on('click', '.fa-sort-down, .fa-sort-up', function() {
+                    var _scope = angular.element(this).scope();
+                    _scope.$field.sortDown = !_scope.$field.sortDown;
+                    _scope.$field.sortUp = !_scope.$field.sortUp;
+                    _scope.$apply();
+                });
+            });
         }
     }
-}).directive('modelListTr', function($timeout) {
+}).directive('modelListTr', function($timeout, $rootScope) {
     return {
         templateUrl: '/views/snippets/model-list-tr.html',
+        scope: true,
         link: function(scope, elem, filter) {
-
+            scope._list = $rootScope._ctx._modelData.list;
+            // scope._fields = _.map($rootScope._ctx._fields, function(item) {
+            //     return _.values(_.pick(item, 'key', 'type'));
+            // });
+            // scope._fields = _.object(scope._fields);
         }
     }
 });

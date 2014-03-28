@@ -87,6 +87,14 @@ angular.module('uniAdminApp')
             name: 'videoId',
             key: 'videoId'
         }, {
+            type: 'image',
+            name: '封面',
+            key: 'cover'
+        }, {
+            type: 'char',
+            name: '片名',
+            key: 'videoTitle'
+        }, {
             type: 'enumerator',
             name: '电影类型',
             key: 'videoType',
@@ -109,10 +117,41 @@ angular.module('uniAdminApp')
             key: 'publishDate',
             sortable: true
         }, {
-            type: 'char',
-            name: '片名',
-            key: 'videoTitle'
+            type: 'boolean',
+            name: '下线',
+            key: 'offline'
         }];
+
+        $rootScope._ctx._modelData = {
+            meta: {},
+            page: {
+                current: 2,
+                per: 30,
+                total: 420
+            },
+            list: [{
+                videoId: 10001,
+                cover: 'http://js.wiyun.com/site_media/images/wallpaper/eac1bce7-90d5-40a7-a7e2-ae02acca2e86_jpg_152x102_crop_upscale_q85.jpg',
+                videoTitle: '今晚看啥',
+                videoType: '喜剧',
+                publishDate: '2014-03-04',
+                offline: false,
+            }, {
+                videoId: 10001,
+                cover: 'http://js.wiyun.com/site_media/images/wallpaper/eac1bce7-90d5-40a7-a7e2-ae02acca2e86_jpg_152x102_crop_upscale_q85.jpg',
+                videoTitle: '今晚看啥',
+                videoType: '喜剧',
+                publishDate: '2014-03-04',
+                offline: false,
+            }, {
+                videoId: 10001,
+                cover: 'http://js.wiyun.com/site_media/images/wallpaper/eac1bce7-90d5-40a7-a7e2-ae02acca2e86_jpg_152x102_crop_upscale_q85.jpg',
+                videoTitle: '今晚看啥',
+                videoType: '喜剧',
+                publishDate: '2014-03-04',
+                offline: false,
+            }]
+        };
 
         $timeout(function() {
             $rootScope.$emit('refreshSiteMenu');

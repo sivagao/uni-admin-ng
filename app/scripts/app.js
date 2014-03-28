@@ -24,8 +24,7 @@ angular.module('uniAdminApp', [
                 controller: 'AppCtrl'
             })
             .when('/#:partial', {
-                // TO FIX
-                controller: noop
+                controller: noop // TO FIX
             })
             .otherwise({
                 redirectTo: '/'

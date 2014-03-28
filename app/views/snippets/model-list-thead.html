@@ -1,128 +1,26 @@
 <tr>
   <th scope="col" class="action-checkbox-column">
-
-
       <input type="checkbox" id="action-toggle">
-
+  </th>
+  <th scope="col" ng-repeat="$field in _fields" ng-class="{'sortable': $field.sortable}">
+    <span ng-if="!$field.sortable">{{$field.name}}</span>
+    <div class="dropdown pull-left" ng-if="$field.sortable">
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{$field.name}}</a>
+      <ul class="dropdown-menu" role="menu">
+        <li ng-class="{'active': $field.sortUp}"><a class="active">
+          <i class="fa fa-caret-up"></i> 正序</a></li>
+        <li ng-class="{'active': $field.sortDown}"><a class="active">
+          <i class="fa fa-caret-down"></i> 倒序</a></li>
+        <li ng-show="$field.sortDown || $field.sortUp" class="x-field-sort-del"><a class="active" ng-click="cancelSort()">
+          <i class="fa fa-times"></i> 取消排序</a></li>
+      </ul>
+    </div>
+    <div class="pull-right">
+        <a class="toggle">
+          <i class="fa" ng-class="{'fa-sort-down': $field.sortDown,'fa-sort-up': $field.sortUp}"></i></a>
+    </div>
   </th>
   <th scope="col">
-
-
-      TImg
-
-  </th>
-  <th scope="col" class="sortable">
-
-
-      <div class="dropdown pull-left">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-          name
-        </a>
-        <ul class="dropdown-menu" role="menu">
-
-            <li><a href="?_layout=table&amp;o=name" class="active"><i class="fa fa-caret-up"></i> 正序</a></li>
-
-            <li><a href="?_layout=table&amp;o=-name" class="active"><i class="fa fa-caret-down"></i> 倒序</a></li>
-
-        </ul>
-      </div>
-
-  </th>
-  <th scope="col" class="sortable">
-
-
-      <div class="dropdown pull-left">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-          idc
-        </a>
-        <ul class="dropdown-menu" role="menu">
-
-            <li><a href="?_layout=table&amp;o=idc" class="active"><i class="fa fa-caret-up"></i> 正序</a></li>
-
-            <li><a href="?_layout=table&amp;o=-idc" class="active"><i class="fa fa-caret-down"></i> 倒序</a></li>
-
-        </ul>
-      </div>
-
-  </th>
-  <th scope="col" class="sortable">
-
-
-      <div class="dropdown pull-left">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-          guarantee date
-        </a>
-        <ul class="dropdown-menu" role="menu">
-
-            <li><a href="?_layout=table&amp;o=guarantee_date" class="active"><i class="fa fa-caret-up"></i> 正序</a></li>
-
-            <li><a href="?_layout=table&amp;o=-guarantee_date" class="active"><i class="fa fa-caret-down"></i> 倒序</a></li>
-
-        </ul>
-      </div>
-
-  </th>
-  <th scope="col" class="sortable">
-
-
-      <div class="dropdown pull-left">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-          service type
-        </a>
-        <ul class="dropdown-menu" role="menu">
-
-            <li><a href="?_layout=table&amp;o=service_type" class="active"><i class="fa fa-caret-up"></i> 正序</a></li>
-
-            <li><a href="?_layout=table&amp;o=-service_type" class="active"><i class="fa fa-caret-down"></i> 倒序</a></li>
-
-        </ul>
-      </div>
-
-  </th>
-  <th scope="col" class="sortable">
-
-
-      <div class="dropdown pull-left">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-          status
-        </a>
-        <ul class="dropdown-menu" role="menu">
-
-            <li><a href="?_layout=table&amp;o=status" class="active"><i class="fa fa-caret-up"></i> 正序</a></li>
-
-            <li><a href="?_layout=table&amp;o=-status" class="active"><i class="fa fa-caret-down"></i> 倒序</a></li>
-
-        </ul>
-      </div>
-
-  </th>
-  <th scope="col">
-
-
-      Acts
-
-  </th>
-  <th scope="col" class="sortable">
-
-
-      <div class="dropdown pull-left">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-          description
-        </a>
-        <ul class="dropdown-menu" role="menu">
-
-            <li><a href="?_layout=table&amp;o=description" class="active"><i class="fa fa-caret-up"></i> 正序</a></li>
-
-            <li><a href="?_layout=table&amp;o=-description" class="active"><i class="fa fa-caret-down"></i> 倒序</a></li>
-
-        </ul>
-      </div>
-
-  </th>
-  <th scope="col">
-
-
       &nbsp;
-
   </th>
 </tr>
