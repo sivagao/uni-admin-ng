@@ -10,6 +10,138 @@ angular.module('uniAdmin.directives', [
     return {
         templateUrl: '/views/snippets/footer.html'
     }
+}).directive('globalThemes', function($timeout) {
+    return {
+        replace: true,
+        scope: true,
+        templateUrl: '/views/snippets/global-themes.html',
+        link: function(scope, elem, attrs) {
+            scope._themes = [{
+                name: '默认',
+                href: '/static/xadmin/css/themes/bootstrap-xadmin.css'
+            }, {
+                name: 'Bootstrap2',
+                href: '/static/xadmin/css/themes/bootstrap-theme.css'
+            }, {
+                name: 'Cerulean',
+                href: 'http://bootswatch.com/cerulean/bootstrap.min.css'
+            }, {
+                name: 'Cosmo',
+                href: 'http://bootswatch.com/sosmo/bootstrap.min.css'
+            }, {
+                name: 'Cyborg',
+                href: 'http://bootswatch.com/cyborg/bootstrap.min.css'
+            }, {
+                name: 'Darkly',
+                href: 'http://bootswatch.com/darkly/bootstrap.min.css'
+            }, {
+                name: 'Journal',
+                href: 'http://bootswatch.com/journal/bootstrap.min.css'
+            }, {
+                name: 'Lumen',
+                href: 'http://bootswatch.com/lumen/bootstrap.min.css'
+            }, {
+                name: 'Simplex',
+                href: 'http://bootswatch.com/simplex/bootstrap.min.css'
+            }, {
+                name: 'Readable',
+                href: 'http://bootswatch.com/readable/bootstrap.min.css'
+            }, {
+                name: 'Simplex',
+                href: 'http://bootswatch.com/simplex/bootstrap.min.css'
+            }, {
+                name: 'Slate',
+                href: 'http://bootswatch.com/slate/bootstrap.min.css'
+            }, {
+                name: 'Spacelab',
+                href: 'http://bootswatch.com/spacelab/bootstrap.min.css'
+            }, {
+                name: 'Superhero',
+                href: 'http://bootswatch.com/superhero/bootstrap.min.css'
+            }, {
+                name: 'united',
+                href: 'http://bootswatch.com/united/bootstrap.min.css'
+            }, {
+                name: 'Yeti',
+                href: 'http://bootswatch.com/yeti/bootstrap.min.css'
+            }];
+            $timeout((function(scope) {
+                return function() {
+                    var themeHref = $.getCookie('_theme');
+                    var _idx;
+                    if (themeHref) {
+                        _idx = _.pluck(scope._themes, 'href').indexOf(themeHref);
+                        $('#site-theme').attr('href', themeHref);
+                        $('#g-theme-menu li').eq(_idx).addClass('active');
+                    }
+                    var top_nav = $('#top-nav');
+
+                    if ($("#g-theme-menu")) {
+                        $('#g-theme-menu li>a').click(function() {
+                            var $el = $(this);
+                            var themeHref = $el.data('css-href');
+
+                            var topmenu = $('#top-nav .navbar-collapse');
+                            if (topmenu.data('bs.collapse')) topmenu.collapse('hide');
+
+                            var modal = $('<div id="load-theme-modal" class="modal fade" role="dialog"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4>' +
+                                'Loading theme</h4></div><div class="modal-body"><h2 style="text-align:center;"><i class="fa-spinner fa-spin fa fa-large"></i></h2></div></div></div></div>');
+                            $('body').append(modal);
+
+                            modal.on('shown.bs.modal', function() {
+                                $.setCookie('_theme', themeHref);
+
+                                var iframe = document.createElement("IFRAME");
+                                iframe.style.display = 'none';
+                                document.body.appendChild(iframe);
+
+                                modal.on('hidden', function(e) {
+                                    if (iframe) {
+                                        $(iframe).unbind('load');
+                                        iframe.parentNode.removeChild(iframe);
+                                        iframe = null;
+                                    }
+                                    modal.remove();
+                                });
+
+                                $(iframe).load(function() {
+                                    $('#site-theme').attr('href', themeHref);
+
+                                    setTimeout(function() {
+                                        var nav_height = $('#top-nav').height();
+                                        $('#body-content').animate({
+                                            'margin-top': (nav_height + 15)
+                                        }, 500, 'easeOutBounce');
+                                    }, 500);
+
+                                    modal.modal('hide');
+                                    iframe.parentNode.removeChild(iframe);
+                                    iframe = null;
+                                })
+
+                                var ifmDoc = iframe.contentDocument || iframe.contentWindow.document;
+                                ifmDoc.open();
+                                ifmDoc.write('<!doctype><html><head></head><body>');
+                                ifmDoc.write('<link rel="stylesheet" href="' + themeHref + '" />');
+                                ifmDoc.write('</body></html>');
+                                ifmDoc.close();
+
+
+                                $('#g-theme-menu li').removeClass('active');
+                                $el.parent().addClass('active');
+                            })
+
+                            modal.modal().css({
+                                'margin-top': function() {
+                                    return window.pageYOffset;
+                                }
+                            });
+                        })
+                    }
+                }
+            })(scope));
+        }
+    }
 }).directive('siteMenu', function($timeout, $route, $rootScope) {
     return {
         templateUrl: '/views/snippets/site-menu.html',
@@ -199,7 +331,36 @@ angular.module('uniAdmin.directives', [
     return {
         replace: true,
         templateUrl: '/views/snippets/model-list-actions.html',
-        link: function(scope, elem, attrs) {}
+        link: function(scope, elem, attrs) {
+            $timeout(function() {
+                $(".results input.action-select").actions();
+                var action_bar = $('.form-actions');
+                if (action_bar.length) {
+                    var height = action_bar[0].offsetTop + action_bar.outerHeight();
+                    var onchange = function() {
+                        var s = (document.body.scrollTop || document.documentElement.scrollTop) + window.innerHeight;
+                        if (s < height) {
+                            action_bar.addClass('fixed');
+                        } else {
+                            action_bar.removeClass('fixed');
+                        }
+                    }
+                    window.onscroll = onchange;
+                    onchange();
+                }
+                if (window.__admin_ismobile__) {
+                    $(window).bind('resize', function(e) {
+                        var rate = $(window).height() / $(window).width();
+                        var action_bar = $('.form-actions');
+                        if (rate < 1) {
+                            action_bar.css('display', 'none');
+                        } else {
+                            action_bar.css('display', 'block');
+                        }
+                    });
+                }
+            });
+        }
     }
 }).directive('modelListThead', function($timeout, $rootScope) {
     return {
@@ -252,6 +413,9 @@ angular.module('uniAdmin.directives', [
         templateUrl: '/views/snippets/model-list-res-block.html',
         scope: true,
         link: function(scope, elem, attrs) {
+            $timeout(function() {
+                $(".results input.action-select").actions();
+            });
             $rootScope.$watch('_ctx._modelData', function(val) {
                 if (val) {
                     scope._list = $rootScope._ctx._modelData.list;
@@ -427,6 +591,13 @@ angular.module('uniAdmin.directives', [
                 },
                 false
             );
+        }
+    }
+}).directive('globalInlineHelp', function() {
+    return {
+        templateUrl: '/views/snippets/global-inline-help.html',
+        link: function() {
+
         }
     }
 });

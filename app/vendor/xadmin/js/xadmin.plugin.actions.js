@@ -7,11 +7,7 @@
         updateCounter = function() {
             var sel = $(actionCheckboxes).filter(":checked").length;
 
-            $(options.counterContainer).html(interpolate(
-            ngettext('%(sel)s of %(cnt)s selected', '%(sel)s of %(cnt)s selected', sel), {
-                sel: sel,
-                cnt: _actions_icnt
-            }, true));
+            $(options.counterContainer).html(sel + ' 个被选中');
 
             if (sel == actionCheckboxes.length) {
                 showQuestion();
@@ -61,7 +57,7 @@
             clearAcross();
         });
 
-        $(actionCheckboxes).bind('checker', function(e, checked){
+        $(actionCheckboxes).bind('checker', function(e, checked) {
             $(this).prop("checked", checked)
                 .parentsUntil('.grid-item').parent().toggleClass(options.selectedClass, checked);
             updateCounter();
@@ -69,7 +65,9 @@
 
         lastChecked = null;
         $(actionCheckboxes).click(function(event) {
-            if (!event) { var event = window.event; }
+            if (!event) {
+                var event = window.event;
+            }
             var target = event.target ? event.target : event.srcElement;
 
             if (lastChecked && $.data(lastChecked) != $.data(target) && event.shiftKey == true) {
@@ -107,9 +105,9 @@
         selectedClass: "warning"
     }
 
-    $.do_action = function(name){
-      $('#action').val(name);
-      $('#changelist-form').submit();
+    $.do_action = function(name) {
+        $('#action').val(name);
+        $('#changelist-form').submit();
     }
 
     $(document).ready(function($) {

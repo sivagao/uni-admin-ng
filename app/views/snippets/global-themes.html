@@ -1,0 +1,11 @@
+<li class="dropdown g-theme">
+    <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">
+        <i class="fa fa-magic fa fa-white"></i>
+        <span class="hide-sm">主题 <i class="caret"></i></span>
+    </a>
+    <ul id="g-theme-menu" class="dropdown-menu" role="menu">
+        <li ng-repeat="_theme in _themes">
+            <a data-css-href="{{_theme.href}}">{{_theme.name}}</a>
+        </li>
+    </ul>
+</li>

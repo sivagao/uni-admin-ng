@@ -61,6 +61,26 @@
         </div>
     </div>
     <div footer></div>
+    <!-- <div global-inline-help></div> -->
+    <script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-header">
+            <h3>I'm a modal!</h3>
+        </div>
+        <div class="modal-body">
+            <h3>Form</h3>
+            <formly-form fields="formFields" name="ngSimpleForm" validate-submit="submitHandler()"
+                options="formOptions">
+            </formly-form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" ng-click="ok()">OK</button>
+            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
+
+    <button style="position: relative; left: 300px;" class="btn btn-default" ng-click="open()">Open me!</button>
+    <div ng-show="selected">Selection from a modal: {{ selected }}</div>
+
 
     <!--[if lt IE 9]>
     <script src="bower_components/es5-shim/es5-shim.js"></script>
@@ -89,10 +109,10 @@
     <script type="text/javascript" src="/vendor/xadmin/js/xadmin.main.js"></script>
     <script type="text/javascript" src="/vendor/xadmin/js/xadmin.responsive.js"></script>
     <script type="text/javascript" src="/vendor/jquery-ui/jquery.ui.effect.js"></script>
-    <script type="text/javascript" src="/vendor/xadmin/js/xadmin.plugin.themes.js"></script>
     <script type="text/javascript" src="/vendor/xadmin/js/xadmin.page.dashboard.js"></script>
     <script type="text/javascript" src="/vendor/xadmin/js/xadmin.plugin.portal.js"></script>
     <script type="text/javascript" src="/vendor/xadmin/js/xadmin.plugin.editable.js"></script>
+    <script type="text/javascript" src="/vendor/xadmin/js/xadmin.plugin.actions.js"></script>
     <script type="text/javascript" src="/vendor/flot/jquery.flot.js"></script>
     <script type="text/javascript" src="/vendor/flot/jquery.flot.pie.js"></script>
     <script type="text/javascript" src="/vendor/flot/jquery.flot.time.js"></script>
@@ -109,6 +129,8 @@
     <!-- end xadmin -->
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="/scripts/jquery-helpers.js"></script>
+    <script src="/scripts/formly.js"></script>
     <script src="/scripts/directives/index.js"></script>
     <script src="/scripts/filters.js"></script>
     <script src="/scripts/app.js"></script>
