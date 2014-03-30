@@ -75,11 +75,25 @@ module.exports = function(grunt) {
                 options: {
                     middleware: function(connect) {
                         return [
-                            modRewrite(['!\\.html|\\.js|\\.svg|\\.css|\\.png$ /index.html [L]']),
+                            require('grunt-connect-proxy/lib/utils').proxyRequest,
+                            modRewrite(['!\\.html|\\.js|\\.svg|\\.css|\\.png|\\api.*$ /index.html [L]']),
                             mountFolder(connect, '.tmp'),
                             mountFolder(connect, 'app')
                         ];
-                    }
+                    },
+                    proxies: [{
+                        context: '/ebooks/api',
+                        host: '192.168.100.38',
+                        changeOrigin: true,
+                        port: 8983
+                    }, {
+                        context: '/data/api',
+                        host: 'mario.sdk.wandoujia.com',
+                        changeOrigin: true,
+                        rewrite: {
+                            '^/data': ''
+                        }
+                    }]
                 }
             },
             test: {

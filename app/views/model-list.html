@@ -50,8 +50,9 @@
 
     <table class="table table-bordered table-striped table-hover">
       <thead model-list-thead></thead>
-      <tbody model-list-tr></tbody>
+      <tbody ng-if="_ctx.currentResource.meta.layout != 'inline-block'" model-list-tr></tbody>
     </table>
+    <div ng-if="_ctx.currentResource.meta.layout == 'inline-block'" model-list-res-block></div>
     </div>
     <div model-list-actions></div>
     </form>

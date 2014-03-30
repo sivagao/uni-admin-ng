@@ -35,8 +35,14 @@
     <link href="/vendor/xadmin/css/xadmin.form.css" type="text/css" media="screen" rel="stylesheet" />
     <!-- end xamdin -->
 
+    <!-- plugins siva -->
+    <!-- Add fancyBox -->
+    <script type="text/javascript" src="/vendor/fancybox/jquery.fancybox.pack.js"></script>
+    <link rel="stylesheet" type="text/css" href="/vendor/fancybox/jquery.fancybox.css" media="screen">
+    <!-- end plugins -->
+
     <!-- build:css({.tmp,app}) styles/main.css -->
-    <!-- <link rel="stylesheet" href="styles/main.css"> -->
+    <link rel="stylesheet" href="/styles/main.css">
     <!-- endbuild -->
   </head>
   <body ng-app="uniAdminApp">
@@ -86,6 +92,7 @@
     <script type="text/javascript" src="/vendor/xadmin/js/xadmin.plugin.themes.js"></script>
     <script type="text/javascript" src="/vendor/xadmin/js/xadmin.page.dashboard.js"></script>
     <script type="text/javascript" src="/vendor/xadmin/js/xadmin.plugin.portal.js"></script>
+    <script type="text/javascript" src="/vendor/xadmin/js/xadmin.plugin.editable.js"></script>
     <script type="text/javascript" src="/vendor/flot/jquery.flot.js"></script>
     <script type="text/javascript" src="/vendor/flot/jquery.flot.pie.js"></script>
     <script type="text/javascript" src="/vendor/flot/jquery.flot.time.js"></script>
@@ -103,6 +110,7 @@
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="/scripts/directives/index.js"></script>
+    <script src="/scripts/filters.js"></script>
     <script src="/scripts/app.js"></script>
     <script src="/scripts/controllers/main.js"></script>
     <!-- endbuild -->

@@ -5,7 +5,8 @@ angular.module('uniAdminApp', [
     'ngResource',
     'ngSanitize',
     'ngRoute',
-    'uniAdmin.directives'
+    'uniAdmin.directives',
+    'uniAdmin.filters'
 ])
     .config(function($routeProvider, $locationProvider) {
         $locationProvider.html5Mode(true);
@@ -134,8 +135,5 @@ angular.module('uniAdminApp', [
                     });
                 }
             })(jQuery);
-        });
-        $rootScope.$on('$routeChangeSuccess', function(scope, next, current) {
-
         });
     });

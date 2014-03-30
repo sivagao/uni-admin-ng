@@ -50,7 +50,7 @@ angular.module('uniAdmin.directives', [
     return {
         replace: true,
         templateUrl: '/views/snippets/model-list-filter.html',
-        link: function(scope, elem, filter) {
+        link: function(scope, elem, attrs) {
             // design data structure
             // key的类型-》 char, daytime, select，foreign-key, number
             scope._fields = $rootScope._ctx._fields;
@@ -132,37 +132,37 @@ angular.module('uniAdmin.directives', [
     return {
         replace: true,
         templateUrl: '/views/snippets/model-list-columns.html',
-        link: function(scope, elem, filter) {}
+        link: function(scope, elem, attrs) {}
     }
 }).directive('modelListExport', function($timeout) {
     return {
         replace: true,
         templateUrl: '/views/snippets/model-list-export.html',
-        link: function(scope, elem, filter) {}
+        link: function(scope, elem, attrs) {}
     }
 }).directive('modelListBreadcrumb', function($timeout) {
     return {
         replace: true,
         templateUrl: '/views/snippets/model-list-breadcrumb.html',
-        link: function(scope, elem, filter) {}
+        link: function(scope, elem, attrs) {}
     }
 }).directive('modelListBookmarks', function($timeout) {
     return {
         replace: true,
         templateUrl: '/views/snippets/model-list-bookmarks.html',
-        link: function(scope, elem, filter) {}
+        link: function(scope, elem, attrs) {}
     }
 }).directive('modelListSearch', function($timeout) {
     return {
         replace: true,
         templateUrl: '/views/snippets/model-list-search.html',
-        link: function(scope, elem, filter) {}
+        link: function(scope, elem, attrs) {}
     }
 }).directive('modelListLayout', function($timeout) {
     return {
         replace: true,
         templateUrl: '/views/snippets/model-list-layout.html',
-        link: function(scope, elem, filter) {
+        link: function(scope, elem, attrs) {
             $timeout(function() {
                 //full screen btn
                 $('.layout-btns .layout-full').click(function(e) {
@@ -199,7 +199,7 @@ angular.module('uniAdmin.directives', [
     return {
         replace: true,
         templateUrl: '/views/snippets/model-list-actions.html',
-        link: function(scope, elem, filter) {}
+        link: function(scope, elem, attrs) {}
     }
 }).directive('modelListThead', function($timeout, $rootScope) {
     return {
@@ -210,7 +210,7 @@ angular.module('uniAdmin.directives', [
                 this.$field.sortUp = false;
             };
         },
-        link: function(scope, elem, filter) {
+        link: function(scope, elem, attrs) {
             scope._fields = $rootScope._ctx._fields;
             $timeout(function() {
                 elem.find('.fa-caret-up, .fa-caret-down').parents('li').click(function() {
@@ -237,12 +237,196 @@ angular.module('uniAdmin.directives', [
     return {
         templateUrl: '/views/snippets/model-list-tr.html',
         scope: true,
-        link: function(scope, elem, filter) {
+        link: function(scope, elem, attrs) {
             scope._list = $rootScope._ctx._modelData.list;
-            // scope._fields = _.map($rootScope._ctx._fields, function(item) {
-            //     return _.values(_.pick(item, 'key', 'type'));
-            // });
-            // scope._fields = _.object(scope._fields);
+            /*
+                scope._fields = _.map($rootScope._ctx._fields, function(item) {
+                    return _.values(_.pick(item, 'key', 'type'));
+                });
+                scope._fields = _.object(scope._fields);
+             */
+        }
+    }
+}).directive('modelListResBlock', function($timeout, $rootScope, $http) {
+    return {
+        templateUrl: '/views/snippets/model-list-res-block.html',
+        scope: true,
+        link: function(scope, elem, attrs) {
+            $rootScope.$watch('_ctx._modelData', function(val) {
+                if (val) {
+                    scope._list = $rootScope._ctx._modelData.list;
+                }
+            }, true);
+            scope.dropHandler = function(src, dest) {
+                var _src = $rootScope._ctx._modelData.list[src.replace('res-block-', '')];
+                $rootScope._ctx._modelData.list[src.replace('res-block-', '')] = $rootScope._ctx._modelData.list[dest.replace('res-block-', '')];
+                $rootScope._ctx._modelData.list[dest.replace('res-block-', '')] = _src;
+            };
+
+            scope.getSearchResult = function(e) {
+                return $http.get('http://192.168.100.38:9190/api/v1/search/?subscribe=false').then(function(resp) {
+                    var results = _.map(resp.data.result, function(item) {
+                        return item.title;
+                    });
+                    return results;
+                });
+            };
+
+            scope.typeaheadOnSelectHandler = function(e) {
+                console.log('ok');
+            };
+        }
+    }
+}).directive('modelListEditable', function($timeout, $rootScope, $templateCache, $http, $compile) {
+    return {
+        scope: true,
+        link: function(scope, elem, attrs) {
+            if (!$templateCache.get('/views/snippets/model-list-editable.html')) {
+                $http.get('/views/snippets/model-list-editable.html').then(function(resp) {
+                    $templateCache.put('/views/snippets/model-list-editable.html', resp.data);
+                });
+            }
+            scope._field = elem.scope()._field;
+            // scope._val = elem.parents('td').find('.editable-field').html();
+            scope._val = elem.scope().$parent.$parent.$parent.$item[scope._field.key];
+
+            $.fn.editpop.Constructor.prototype.beforeToggle = function() {
+                var $el = this.$element
+                if (this.content == null) {
+                    var that = this
+                    $el.find('>i').removeClass('fa fa-edit').addClass('fa-spinner fa-spin');
+                    var content = $compile('<div model-list-editable-tpl></div>')(scope);
+                    $el.find('>i').removeClass('fa-spinner fa-spin').addClass('fa fa-edit');
+                    that.content = content;
+                    that.toggle();
+                } else {
+                    this.toggle()
+                }
+            }
+            elem.editpop();
+        }
+    }
+}).directive('modelListEditableTpl', function($timeout, $rootScope, $templateCache, $http, $compile) {
+    return {
+        scope: true,
+        templateUrl: '/views/snippets/model-list-editable.html',
+        link: function(scope, elem, attrs) {
+            scope._field = elem.scope()._field;
+        }
+    }
+}).directive('imgSizeAlt', function($timeout, $rootScope, $templateCache, $http, $compile) {
+    return {
+        scope: true,
+        // priority: 100,
+        link: function(scope, elem, attrs) {
+            var _img = new Image();
+            $timeout(function() {
+                _img.src = elem.attr('src');
+                elem.attr('title', _img.width + 'x' + _img.height);
+                elem.fancybox({
+                    helpers: {
+                        title: {
+                            type: 'over'
+                        }
+                    }
+                });
+                elem.css('display', 'block!important');
+            });
+        }
+    }
+}).directive('resBlockDraggable', function($timeout, $rootScope, $templateCache, $http, $compile) {
+    return {
+        scope: true,
+        restrict: 'AC',
+        link: function(scope, elem, attrs) {
+            var el = elem[0];
+
+            el.draggable = true;
+
+            el.addEventListener(
+                'dragstart',
+                function(e) {
+                    e.dataTransfer.effectAllowed = 'move';
+                    e.dataTransfer.setData('Text', this.id);
+                    $(this).addClass('drag');
+                    return false;
+                },
+                false
+            );
+
+            el.addEventListener(
+                'dragend',
+                function(e) {
+                    $(this).removeClass('drag');
+                    return false;
+                },
+                false
+            );
+        }
+    }
+}).directive('resBlockDroppable', function($timeout, $rootScope, $templateCache, $http, $compile) {
+    return {
+        scope: {
+            drop: '&',
+            bin: '='
+        },
+        restrict: 'AC',
+        link: function(scope, element) {
+            // again we need the native object
+            var el = element[0];
+
+            el.addEventListener(
+                'dragover',
+                function(e) {
+                    e.dataTransfer.dropEffect = 'move';
+                    // allows us to drop
+                    if (e.preventDefault) e.preventDefault();
+                    $(this).addClass('over');
+                    return false;
+                },
+                false
+            );
+
+            el.addEventListener(
+                'dragenter',
+                function(e) {
+                    $(this).addClass('over');
+                    return false;
+                },
+                false
+            );
+
+            el.addEventListener(
+                'dragleave',
+                function(e) {
+                    $(this).removeClass('over');
+                    return false;
+                },
+                false
+            );
+
+            el.addEventListener(
+                'drop',
+                function(e) {
+                    // Stops some browsers from redirecting.
+                    if (e.stopPropagation) e.stopPropagation();
+
+                    $(this).removeClass('over');
+                    var srcId = e.dataTransfer.getData('Text');
+                    var destId = this.id;
+
+                    // call the passed drop function
+                    scope.$apply(function(scope) {
+                        var fn = scope.drop();
+                        if ('undefined' !== typeof fn) {
+                            fn(srcId, destId);
+                        }
+                    });
+
+                    return false;
+                },
+                false
+            );
         }
     }
 });

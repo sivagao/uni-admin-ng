@@ -1,0 +1,35 @@
+<form method="post" action="/app/host/12/patch/" ng-switch on="_field.type">
+    <div class="form-group">
+        <label class="control-label requiredField">
+            {{_field.name}}<span class="asteriskField">*</span>
+        </label>
+        <div class="controls" ng-switch-when="enumerator">
+            <select class="adminselectwidget form-control" id="id_service_type" name="service_type">
+                <option value="">---------</option>
+                <option ng-repeat="choice in _field.choices" value="{{choice.key}}">{{choice.val}}</option>
+            </select>
+        </div>
+        <div class="controls" ng-switch-when="search">
+            <a href="/app/idc/add/" title="Create New IDC" class="btn btn-primary btn-sm btn-ajax pull-right"><i class="fa fa-plus"></i></a>
+            <div class="control-wrap">
+                <input class="select-search" data-choices="?" data-label="2342" data-placeholder="Search IDC" data-search-url="/app/idc/" type="text" value="{{_val}}" />
+            </div>
+        </div>
+
+        <div class="controls" ng-switch-when="char">
+            <input class="text-field admintextinputwidget form-control" maxlength="64" name="name" type="text" value="{{_val}}" />
+        </div>
+
+        <div class="controls" ng-switch-when="number">
+            <input class="text-field admintextinputwidget form-control" maxlength="64" name="name" type="text" value="{{_val}}" />
+        </div>
+
+        <div class="controls" ng-switch-when="date">
+            <div class="input-group date bootstrap-datepicker">
+                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                <input class="date-field admindatewidget form-control"size="10" type="text" value="{{_val}}" /> <span class="input-group-btn"><button class="btn btn-default" type="button">今天</button> </span>
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-success btn-block btn-sm">Apply</button>
+</form>

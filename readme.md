@@ -1,4 +1,4 @@
-# Un-Admin by Angular.js and API
+# Uni-Admin by Angular.js and API
 
 ![截图展示 - model-list](http://img.wdjimg.com/uni-admin/QQ20140329-5.png)
 

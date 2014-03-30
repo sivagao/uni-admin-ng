@@ -1,28 +1,19 @@
 <tr class="grid-item" ng-repeat="$item in _list">
     <td class="action-checkbox">
-        <input class="action-select" type="checkbox" value="3">
+        <input class="action-select" type="checkbox">
     </td>
     <td ng-repeat="_field in _ctx._fields" ng-switch on="_field.type">
         <div ng-switch-when="image">
-            <img src="{{$item[_field.key]}}">
-        </div>
-        <div ng-switch-when="char">
-            <div class="btn-group pull-right">
-                <a class="editable-handler" title="" data-editable-field="name" data-editable-loadurl="/host/host/3/patch/?fields=name" data-original-title="输入name"><i class="fa fa-edit"></i></a>
-            </div>
-            <a href="/host/host/3/update/"><span class="editable-field">test2</span></a>
-        </div>
-        <div ng-switch-when="date">
-            <div class="btn-group pull-right">
-                <a class="editable-handler" title="" data-editable-field="guarantee_date" data-editable-loadurl="/host/host/3/patch/?fields=guarantee_date" data-original-title="输入guarantee date"><i class="fa fa-edit"></i></a>
-            </div>
-            <span class="editable-field">{{$item[_field.key]}}</span>
+            <img src="{{$item[_field.key]}}" img-size-alt>
         </div>
         <div ng-switch-default>
             <div class="btn-group pull-right">
-                <a class="editable-handler" title="" data-editable-field="name" data-editable-loadurl="/host/host/3/patch/?fields=name" data-original-title="输入name"><i class="fa fa-edit"></i></a>
+                <a model-list-editable data-original-title="输入{{_field.name}}"><i class="fa fa-edit"></i></a>
             </div>
-            <a href="/host/host/3/update/"><span class="editable-field">{{$item[_field.key]}}</span></a>
+            <a href="" ng-if="_field.linkable">
+                <span class="editable-field">{{$item[_field.key]}}</span>
+            </a>
+            <span class="editable-field" ng-if="!_field.linkable">{{$item[_field.key]}}</span>
         </div>
     </td>
 </tr>
