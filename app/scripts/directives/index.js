@@ -2,9 +2,24 @@
 
 angular.module('uniAdmin.directives', [
     'ui.bootstrap'
-]).directive('topNav', function() {
+]).directive('topNav', function($rootScope) {
     return {
-        templateUrl: '/views/snippets/top-nav.html'
+        templateUrl: '/views/snippets/top-nav.html',
+        scope: true,
+        link: function(scope, elem, attrs) {
+            scope._searches = [];
+            scope._addes = [];
+            _.each($rootScope._ctx._meta, function(item) {
+                var _prefix = item.val;
+                scope._searches = scope._searches.concat(_.map(item.children, function(i) {
+                    return {
+                        name: _prefix + ' - ' + i.val,
+                        url: ''
+                    };
+                }));
+            });
+            scope._addes = scope._searches;
+        }
     }
 }).directive('footer', function() {
     return {
@@ -18,10 +33,10 @@ angular.module('uniAdmin.directives', [
         link: function(scope, elem, attrs) {
             scope._themes = [{
                 name: '默认',
-                href: '/static/xadmin/css/themes/bootstrap-xadmin.css'
+                href: '/vendor/xadmin/css/themes/bootstrap-xadmin.css'
             }, {
                 name: 'Bootstrap2',
-                href: '/static/xadmin/css/themes/bootstrap-theme.css'
+                href: '/vendor/xadmin/css/themes/bootstrap-theme.css'
             }, {
                 name: 'Cerulean',
                 href: 'http://bootswatch.com/cerulean/bootstrap.min.css'
@@ -146,8 +161,8 @@ angular.module('uniAdmin.directives', [
     return {
         templateUrl: '/views/snippets/site-menu.html',
         link: function(scope, elem, attr) {
-            scope._ctx = {};
-            scope._ctx._meta = $rootScope._ctx._meta;
+            // scope._ctx = {};
+            // scope._ctx._meta = $rootScope._ctx._meta;
 
             // 切换active status
             elem.on('click', 'a.list-group-item', function(e) {
@@ -159,6 +174,12 @@ angular.module('uniAdmin.directives', [
             // refresh后添加active状态
             // $route.current.params -> app, resource
             var refreshFn = function() {
+                if (!$route.current.params.app) {
+                    elem.find('.panel').removeClass('panel-info').addClass('panel-default')
+                        .find('.panel-collapse').removeClass('in')
+                        .find('a.list-group-item').removeClass('active');
+                    return;
+                }
                 var _x1 = _.find(scope._ctx._meta, function(item) {
                     return item.key === $route.current.params.app
                 });
@@ -332,11 +353,15 @@ angular.module('uniAdmin.directives', [
         replace: true,
         templateUrl: '/views/snippets/model-list-actions.html',
         link: function(scope, elem, attrs) {
+            // trigger fn.actions on
             $timeout(function() {
-                $(".results input.action-select").actions();
                 var action_bar = $('.form-actions');
+                var height = action_bar.offset().top;
+                $timeout(function() {
+                    // 艹， 非常trick, 依赖API的时间
+                    height = action_bar.offset().top;
+                }, 1000);
                 if (action_bar.length) {
-                    var height = action_bar[0].offsetTop + action_bar.outerHeight();
                     var onchange = function() {
                         var s = (document.body.scrollTop || document.documentElement.scrollTop) + window.innerHeight;
                         if (s < height) {
@@ -345,7 +370,7 @@ angular.module('uniAdmin.directives', [
                             action_bar.removeClass('fixed');
                         }
                     }
-                    window.onscroll = onchange;
+                    window.onscroll = _.throttle(onchange, 300);
                     onchange();
                 }
                 if (window.__admin_ismobile__) {
@@ -399,7 +424,14 @@ angular.module('uniAdmin.directives', [
         templateUrl: '/views/snippets/model-list-tr.html',
         scope: true,
         link: function(scope, elem, attrs) {
-            scope._list = $rootScope._ctx._modelData.list;
+            $rootScope.$watch('_ctx._modelData.list', function(val) {
+                if (val) {
+                    scope._list = $rootScope._ctx._modelData.list;
+                }
+            }, true);
+            $timeout(function() {
+                $(".results input.action-select").actions();
+            });
             /*
                 scope._fields = _.map($rootScope._ctx._fields, function(item) {
                     return _.values(_.pick(item, 'key', 'type'));
@@ -415,7 +447,7 @@ angular.module('uniAdmin.directives', [
         link: function(scope, elem, attrs) {
             $timeout(function() {
                 $(".results input.action-select").actions();
-            });
+            }, 1500);
             $rootScope.$watch('_ctx._modelData', function(val) {
                 if (val) {
                     scope._list = $rootScope._ctx._modelData.list;

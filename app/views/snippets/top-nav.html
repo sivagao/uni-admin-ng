@@ -10,46 +10,48 @@
   <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">
   <i class="fa fa-plus fa fa-white"></i> <span class="hide-sm">增加 <i class="caret"></i></span></a>
   <ul id="g-add-menu" class="dropdown-menu" role="menu">
-
-        <li><a href="/xadmin/userwidget/add/"><i class="fa fa-plus"></i> 增加 用户小组件</a></li>
-
-        <li><a href="/auth/user/add/"><i class="fa fa-plus"></i> 增加 用户</a></li>
-
-        <li><a href="/host/maintainlog/add/"><i class="fa fa-plus"></i> 增加 Maintain Log</a></li>
-
-        <li><a href="/host/hostgroup/add/"><i class="fa fa-plus"></i> 增加 Host Group</a></li>
-
-        <li><a href="/host/accessrecord/add/"><i class="fa fa-plus"></i> 增加 Access Record</a></li>
-
-        <li><a href="/xadmin/bookmark/add/"><i class="fa fa-plus"></i> 增加 书签</a></li>
-
-        <li><a href="/host/idc/add/"><i class="fa fa-plus"></i> 增加 IDC</a></li>
-
-        <li><a href="/auth/group/add/"><i class="fa fa-plus"></i> 增加 组</a></li>
-
-        <li><a href="/app/kitchensink/add/"><i class="fa fa-plus"></i> 增加 Kitchen sink</a></li>
-
-        <li><a href="/comments/comment/add/"><i class="fa fa-plus"></i> 增加 评论</a></li>
-
-        <li><a href="/xadmin/usersettings/add/"><i class="fa fa-plus"></i> 增加 用户设置</a></li>
-
-        <li><a href="/reversion/version/add/"><i class="fa fa-plus"></i> 增加 Version</a></li>
-
-        <li><a href="/auth/permission/add/"><i class="fa fa-plus"></i> 增加 权限</a></li>
-
-        <li><a href="/app/country/add/"><i class="fa fa-plus"></i> 增加 Country</a></li>
-
-        <li><a href="/reversion/revision/add/"><i class="fa fa-plus"></i> 增加 Revision</a></li>
-
-        <li><a href="/app/continent/add/"><i class="fa fa-plus"></i> 增加 Continent</a></li>
-
-        <li><a href="/host/host/add/"><i class="fa fa-plus"></i> 增加 Host</a></li>
-
+    <li ng-repeat="_add in _addes">
+      <a data-action="{{_add.url}}">
+        <i class="fa fa-search"></i> 增加 {{_add.name}}}</a>
+    </li>
+    <!-- 特殊的： 用户小组件， 书签等 -->
   </ul>
 </li>
 
+  <li global-themes></li>
+          <li class="dropdown">
+            <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">
+            <strong>欢迎， admin</strong> <span class="caret"></span></a>
+            <ul id="g-account-menu" class="dropdown-menu" role="menu">
+              <li><a href="/account/password/"><i class="fa fa-key"></i> Change Password</a></li>
+            </ul>
+          </li>
+
+        <li><a href="/logout/"><i class="show-sm fa fa-signout"></i><span class="hide-sm">注销</span></a></li>
+      </ul>
 
 
+<form method="get" class="top-search-form navbar-form navbar-left" id="g-search">
+  <div class="input-group">
+    <input name="_q_" class="form-control" type="text">
+    <span class="input-group-btn">
+      <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+        <i class="fa fa-search"></i> 搜索 <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li ng-repeat="_search in _searches">
+          <a data-action="{{_search.url}}">
+            <i class="fa fa-search"></i> 搜索 {{_search.name}}</a>
+        </li>
+      </ul>
+    </span>
+  </div>
+</form>
+
+
+    </div>
+  </div>
+<!--
 <li class="dropdown g-setlang">
   <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">
   <i class="fa fa-globe fa fa-white"></i> <span class="hide-sm">
@@ -61,13 +63,6 @@
     <input id="setlang-id_language" name="language" type="hidden" value="zh-cn" />
   </form>
   <ul id="g-setlang-menu" class="dropdown-menu" role="menu">
-
-
-      <li><a data-lang="de"><i class="fa fa-flag"></i> Deutsch (de)</a></li>
-
-      <li><a data-lang="en"><i class="fa fa-flag"></i> English (en)</a></li>
-
-      <li><a data-lang="ja"><i class="fa fa-flag"></i> 日本語 (ja)</a></li>
 
       <li><a data-lang="lt"><i class="fa fa-flag"></i> Lietuviškai (lt)</a></li>
 
@@ -93,53 +88,4 @@
     })
   })
 </script>
-  <li global-themes></li>
-          <li class="dropdown">
-            <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">
-            <strong>欢迎， admin</strong> <span class="caret"></span></a>
-            <ul id="g-account-menu" class="dropdown-menu" role="menu">
-              <li><a href="/account/password/"><i class="fa fa-key"></i> Change Password</a></li>
-            </ul>
-          </li>
-
-        <li><a href="/logout/"><i class="show-sm fa fa-signout"></i><span class="hide-sm">注销</span></a></li>
-      </ul>
-
-
-<form method="get" class="top-search-form navbar-form navbar-left" id="g-search">
-  <div class="input-group">
-    <input name="_q_" class="form-control" type="text">
-    <span class="input-group-btn">
-      <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-        <i class="fa fa-search"></i> 搜索 <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu">
-
-          <li><a data-action="/auth/user/"><i class="fa fa-search"></i> 搜索用户</a></li>
-
-          <li><a data-action="/host/maintainlog/"><i class="fa fa-search"></i> 搜索Maintain Log</a></li>
-
-          <li><a data-action="/host/hostgroup/"><i class="fa fa-search"></i> 搜索Host Group</a></li>
-
-          <li><a data-action="/host/idc/"><i class="fa fa-search"></i> 搜索IDC</a></li>
-
-          <li><a data-action="/auth/group/"><i class="fa fa-search"></i> 搜索组</a></li>
-
-          <li><a data-action="/app/kitchensink/"><i class="fa fa-search"></i> 搜索Kitchen sinks</a></li>
-
-          <li><a data-action="/comments/comment/"><i class="fa fa-search"></i> 搜索评论</a></li>
-
-          <li><a data-action="/app/country/"><i class="fa fa-search"></i> 搜索Countries</a></li>
-
-          <li><a data-action="/app/continent/"><i class="fa fa-search"></i> 搜索Continents</a></li>
-
-          <li><a data-action="/host/host/"><i class="fa fa-search"></i> 搜索Host</a></li>
-
-      </ul>
-    </span>
-  </div>
-</form>
-
-
-    </div>
-  </div>
+ -->
