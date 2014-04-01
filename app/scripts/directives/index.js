@@ -356,17 +356,14 @@ angular.module('uniAdmin.directives', [
             // trigger fn.actions on
             $timeout(function() {
                 var action_bar = $('.form-actions');
-                var height = action_bar.offset().top;
-                $timeout(function() {
-                    // 艹， 非常trick, 依赖API的时间
-                    height = action_bar.offset().top;
-                }, 1000);
                 if (action_bar.length) {
                     var onchange = function() {
                         var s = (document.body.scrollTop || document.documentElement.scrollTop) + window.innerHeight;
+                        var height = $('#footer').offset().top;
                         if (s < height) {
                             action_bar.addClass('fixed');
-                        } else {
+                        }
+                        if (s > (height + 50)) {
                             action_bar.removeClass('fixed');
                         }
                     }
@@ -445,32 +442,43 @@ angular.module('uniAdmin.directives', [
         templateUrl: '/views/snippets/model-list-res-block.html',
         scope: true,
         link: function(scope, elem, attrs) {
-            $timeout(function() {
-                $(".results input.action-select").actions();
-            }, 1500);
+
             $rootScope.$watch('_ctx._modelData', function(val) {
                 if (val) {
                     scope._list = $rootScope._ctx._modelData.list;
+                    $timeout(function() {
+                        $(".results input.action-select").actions();
+                        elem.find('.related_menu').on('click', 'li', function(e) {
+
+                            var _scope = $(this).scope();
+                            try {
+                                _scope[$(this).find('a').attr('action-handler')].call(_scope, _scope.$item);
+                            } catch (e) {
+                                console.log(e);
+                            }
+                            scope.$apply();
+                            return false;
+                            // call the passed drop function
+                            scope.$apply(function(scope) {
+
+                                var fn = scope.drop();
+                                if ('undefined' !== typeof fn) {
+                                    fn(srcId, destId);
+                                }
+                            });
+                        });
+                        var maxItemHeight = 0;
+                        elem.find('.thumbnail').each(function(idx, item) {
+                            if (maxItemHeight < $(item).height()) {
+                                maxItemHeight = $(item).height();
+                            }
+                        });
+                        elem.find('.thumbnail').height(maxItemHeight);
+                    }, 1000);
                 }
+
             }, true);
-            scope.dropHandler = function(src, dest) {
-                var _src = $rootScope._ctx._modelData.list[src.replace('res-block-', '')];
-                $rootScope._ctx._modelData.list[src.replace('res-block-', '')] = $rootScope._ctx._modelData.list[dest.replace('res-block-', '')];
-                $rootScope._ctx._modelData.list[dest.replace('res-block-', '')] = _src;
-            };
 
-            scope.getSearchResult = function(e) {
-                return $http.get('http://192.168.100.38:9190/api/v1/search/?subscribe=false').then(function(resp) {
-                    var results = _.map(resp.data.result, function(item) {
-                        return item.title;
-                    });
-                    return results;
-                });
-            };
-
-            scope.typeaheadOnSelectHandler = function(e) {
-                console.log('ok');
-            };
         }
     }
 }).directive('modelListEditable', function($timeout, $rootScope, $templateCache, $http, $compile) {

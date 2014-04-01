@@ -68,7 +68,7 @@ module.exports = function(grunt) {
             options: {
                 port: 9000,
                 // Change this to '0.0.0.0' to access the server from outside.
-                hostname: 'localhost',
+                hostname: '*',
                 livereload: 35729
             },
             livereload: {
@@ -80,21 +80,19 @@ module.exports = function(grunt) {
                             mountFolder(connect, '.tmp'),
                             mountFolder(connect, 'app')
                         ];
-                    },
-                    proxies: [{
-                        context: '/ebooks/api',
-                        host: '192.168.100.38',
-                        changeOrigin: true,
-                        port: 8983
-                    }, {
-                        context: '/data/api',
-                        host: 'mario.sdk.wandoujia.com',
-                        changeOrigin: true,
-                        rewrite: {
-                            '^/data': ''
-                        }
-                    }]
-                }
+                    }
+                },
+                proxies: [{
+                    context: '/ebooks/api',
+                    host: '192.168.100.38',
+                    changeOrigin: true,
+                    port: 8983
+                }, {
+                    context: '/api/v1',
+                    host: '192.168.100.38',
+                    port: 9190,
+                    changeOrigin: true
+                }]
             },
             test: {
                 options: {
@@ -385,6 +383,7 @@ module.exports = function(grunt) {
             // 'bower-install',
             'concurrent:server',
             'autoprefixer',
+            'configureProxies:livereload',
             'connect:livereload',
             'watch'
         ]);

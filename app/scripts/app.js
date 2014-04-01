@@ -7,6 +7,7 @@ angular.module('uniAdminApp', [
     'ngRoute',
     'uniAdmin.directives',
     'uniAdmin.filters',
+    'uniAdmin.decorators',
     'formly'
 ])
     .config(function($routeProvider, $locationProvider) {
@@ -310,7 +311,7 @@ angular.module('uniAdminApp', [
                     inlineAdd: true,
                     actions: [{
                         name: '删除',
-                        func: 'delete'
+                        func: 'deleteHandler'
                     }, {
                         name: '发送到首页',
                         func: 'sendToHome'

@@ -50,6 +50,14 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
     <div top-nav></div>
+    <alert ng-repeat="alert in _ctx.alerts" type="alert.type" close="closeAlert($index)">{{alert.msg}}</alert>
+    <style type="text/css">
+        .alert {
+            position: fixed;
+            z-index: 1000;
+            right: 10px;
+        }
+    </style>
 
     <!-- Add your site or application content here -->
     <div id="body-content" class="clearfix row">
@@ -62,25 +70,26 @@
     </div>
     <div footer></div>
     <!-- <div global-inline-help></div> -->
-    <script type="text/ng-template" id="myModalContent.html">
-        <div class="modal-header">
-            <h3>I'm a modal!</h3>
-        </div>
-        <div class="modal-body">
-            <h3>Form</h3>
-            <formly-form fields="formFields" name="ngSimpleForm" validate-submit="submitHandler()"
-                options="formOptions">
-            </formly-form>
-        </div>
-        <div class="modal-footer">
-            <button class="btn btn-primary" ng-click="ok()">OK</button>
-            <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
-        </div>
-    </script>
+    <!--
+        <script type="text/ng-template" id="myModalContent.html">
+            <div class="modal-header">
+                <h3>I'm a modal!</h3>
+            </div>
+            <div class="modal-body">
+                <h3>Form</h3>
+                <formly-form fields="formFields" name="ngSimpleForm" validate-submit="submitHandler()"
+                    options="formOptions">
+                </formly-form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" ng-click="ok()">OK</button>
+                <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+            </div>
+        </script>
 
-    <button style="position: relative; left: 300px;" class="btn btn-default" ng-click="open()">Open me!</button>
-    <div ng-show="selected">Selection from a modal: {{ selected }}</div>
-
+        <button style="position: relative; left: 300px;" class="btn btn-default" ng-click="open()">Open me!</button>
+        <div ng-show="selected">Selection from a modal: {{ selected }}</div>
+     -->
 
     <!--[if lt IE 9]>
     <script src="bower_components/es5-shim/es5-shim.js"></script>
@@ -133,6 +142,7 @@
     <script src="/scripts/formly.js"></script>
     <script src="/scripts/directives/index.js"></script>
     <script src="/scripts/filters.js"></script>
+    <script src="/scripts/decorators.js"></script>
     <script src="/scripts/app.js"></script>
     <script src="/scripts/controllers/main.js"></script>
     <!-- endbuild -->

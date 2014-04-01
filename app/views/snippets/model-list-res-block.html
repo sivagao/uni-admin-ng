@@ -1,13 +1,13 @@
 <div class="panel panel-default thumbnail-panel">
   <div class="panel-body">
   <div class="row">
-    <div class="col-md-3 col-sm-3 col-xs-4 thumbnail text-center grid-item" ng-if="_ctx.currentResource.meta.inlineAdd">
+    <div class="col-md-3 col-sm-3 col-xs-4 thumbnail text-center" ng-if="_ctx.currentResource.meta.inlineAdd">
         <h4>添加新资源</h4>
         <pre>Model: {{asyncSelected | json}}</pre>
-        <input type="text" ng-model="asyncSelected" placeholder="Locations loaded via $http" typeahead="address for address in getSearchResult($viewValue) | filter:$viewValue" typeahead-loading="loadingLocations" class="form-control" typeahead-on-select="typeaheadOnSelectHandler(asyncSelected)">
+        <input type="text" ng-model="asyncSelected" placeholder="Locations loaded via $http" typeahead="ebook.title for ebook in getSearchResult($viewValue) | filter:$viewValue" typeahead-loading="loadingLocations" class="form-control" typeahead-on-select="typeaheadOnSelectHandler($item)">
     </div>
-    <div class="col-md-3 col-sm-3 col-xs-4" ng-repeat="$item in _list">
-          <div class="thumbnail text-center grid-item res-block-draggable res-block-droppable" drop="dropHandler" id="res-block-{{$index}}">
+    <div class="col-md-3 col-sm-3 col-xs-4 thumbnail" ng-repeat="$item in _list">
+          <div class="text-center grid-item res-block-draggable res-block-droppable" drop="dropHandler" id="res-block-{{$index}}">
             <h1><i class="fa fa-laptop"></i></h1>
             <ul class="list-unstyled">
             <li class="text-right">
@@ -16,14 +16,14 @@
             <li class="text-right" ng-repeat="_field in _ctx._fields" ng-switch on="_field.type">
                 <div ng-switch-when="image">
                     <strong class="pull-left">{{_field.name}}:</strong>
-                    <img class="fancybox" ng-src="{{$item | deepKey: {key: _field.key} }}" img-size-alt>
+                    <img class="fancybox" ng-src="{{$item | deepKey: {key: _field.key} }}" img-size-alt style="max-height: 124px;">
                 </div>
                 <div ng-switch-default>
                     <div class="btn-group pull-right" ng-if="_field.meta.editable">
                         <a model-list-editable data-original-title="输入{{_field.name}}"><i class="fa fa-edit"></i></a>
                     </div>
                     <strong class="pull-left">{{_field.name}}:</strong>
-                    <span class="editable-field">{{$item[_field.key] | fixLength:50}}</span>
+                    <span class="editable-field">{{$item[_field.key] | fixLength: {item: _field} }}</span>
                 </div>
             </li>
             <li class="text-right">
@@ -32,7 +32,7 @@
                         <i class="icon fa fa-list"></i></a>
                     <ul class="dropdown-menu" role="menu">
                         <li class="with_menu_btn" ng-repeat="action in _ctx.currentResource.meta.actions">
-                            <a href="#{{action.func}}">{{action.name}}</a></li></ul></div>
+                            <a action-handler="{{action.func}}">{{action.name}}</a></li></ul></div>
             </li>
             </ul>
           </div>
