@@ -10,72 +10,63 @@ angular.module('uniAdminApp')
         $rootScope.$emit('refreshSiteMenu');
     }).controller('ModelListCtrl', function($scope, $rootScope, $route, $timeout, $http) {
 
-        $timeout(function() {
-            $rootScope.$emit('refreshSiteMenu');
+        $scope.$on('metaData:update', function() {
+            initCurrentStatus();
+        });
+        if ($rootScope._ctx.currentResource) {
+            initCurrentStatus();
+        }
+
+        function initCurrentStatus() {
+            $rootScope.$broadcast('siteMenu:refresh');
             $rootScope._ctx.currentApp = _.find($rootScope._ctx._meta, function(item) {
                 return item.key === $route.current.params.app;
             });
             $rootScope._ctx.currentResource = _.find($rootScope._ctx.currentApp.children, function(item) {
                 return item.key === $route.current.params.resource;
             });
-        });
-
-        if ($route.current.params.app === 'ebookRanklist') {
-            $rootScope._ctx._fields = [{
-                type: 'char',
-                name: '书名',
-                key: 'title',
-                meta: {
-                    linkable: true,
-                    maxlength: 10
+            if (['ebookRanklist', 'wallpaperRanklist'].indexOf($route.current.params.app) > -1) {
+                $rootScope._ctx._modelData = {
+                    meta: {},
+                    page: {
+                        current: 2,
+                        per: 30,
+                        total: 420
+                    },
+                    list: processAPIData($route.current.params.resource)
+                };
+                if ($route.current.params.app === 'ebookRanklist') {
+                    $rootScope._ctx._fields = $rootScope._ctx._ebookRankListFields;
+                } else {
+                    $rootScope._ctx._fields = $rootScope._ctx._wallpaperRankListFields;
                 }
-            }, {
-                type: 'char',
-                name: '状态',
-                key: 'status',
-            }, {
-                type: 'char',
-                name: '类目',
-                key: 'topCategory',
-            }, {
-                type: 'char',
-                name: '描述',
-                key: 'description',
-                meta: {
-                    maxlength: 50
-                }
-            }, {
-                type: 'image',
-                name: '封面',
-                key: 'cover.l',
-            }];
-
-            $rootScope._ctx._modelData = {
-                meta: {},
-                page: {
-                    current: 2,
-                    per: 30,
-                    total: 420
-                },
-                list: processEbookRanklistAPIData($route.current.params.resource)
-            };
-            processEbookRanklistAPIData($route.current.params.resource);
-        } else {
-            $rootScope._ctx._fields = $rootScope._ctx._baseFields;
-            $rootScope._ctx._modelData = $rootScope._ctx._baseModelData;
+            } else {
+                $rootScope._ctx._fields = $rootScope._ctx._baseFields;
+                $http.get('/fake.baseModelData.js').then(function(resp) {
+                    $rootScope._ctx._modelData = resp.data;
+                });
+            }
         }
 
-        function processEbookRanklistAPIData(type) {
+        function processAPIData(type) {
             // http://192.168.100.38:8983/ebooks/api/v1/ranklist?ranklistName=RANKLIST_SUBSCRIBE
             // var EBOOK_HOST = 'http://192.168.100.38:8983';
             // var API_PREFIX = EBOOK_HOST + '/ebooks/api/v1';
-            var API_PREFIX = '/ebooks/api/v1';
+            var API_PREFIX;
+            switch ($route.current.params.app) {
+                case 'ebookRanklist':
+                    API_PREFIX = '/ebooks/api/v1';
+                    break;
+                case 'wallpaperRanklist':
+                    API_PREFIX = '/wallpapers/api/v1';
+                    break;
+            }
             $http.get(API_PREFIX + '/ranklist', {
                 params: {
                     ranklistName: type
                 }
             }).then(function(resp) {
-                $rootScope._ctx._modelData.list = resp.data;
+                $rootScope._ctx._modelData.list = resp.data || [];
             });
         }
 
@@ -85,6 +76,12 @@ angular.module('uniAdminApp')
             $rootScope._ctx._modelData.list[dest.replace('res-block-', '')] = _src;
         };
         $scope.deleteHandler = function(item) {
+            $rootScope._ctx._modelData.list.splice($rootScope._ctx._modelData.list.indexOf(item), 1);
+        };
+
+        $scope.deleteBatchHandler = function(item) {
+            // get the selected items here
+            return;
             $rootScope._ctx._modelData.list.splice($rootScope._ctx._modelData.list.indexOf(item), 1);
         };
 
@@ -121,13 +118,24 @@ angular.module('uniAdminApp')
         };
 
         $scope.saveRanklist = function(ev) {
+            var _ids = _.pluck($rootScope._ctx._modelData.list, 'id');
+            if (_.uniq(_ids).length != _ids.length) {
+                $rootScope._ctx.alerts = $rootScope._ctx.alerts || [];
+                $rootScope._ctx.alerts.push({
+                    type: 'danger',
+                    msg: 'ebookIds 有重复的！请检查'
+                });
+                return;
+            }
             var _post = {
-                ranklistName: $route.current.params.resource,
-                ebookIds: (_.pluck($rootScope._ctx._modelData.list, 'id')).join(',')
+                rankName: $route.current.params.resource,
+                ebookIds: _ids.join(',')
             };
             console.log(_post);
             $(ev.target).html('保存中').prop('disabled', true);
-            $http.post('API', _post).then(function(resp) {
+            $http.get('/ebooks/api/admin/ebook/updateAllRanklist', {
+                params: _post
+            }).then(function(resp) {
                 $timeout(function() {
                     $(ev.target).html('保存').prop('disabled', false);
                 }, 1000);
@@ -138,4 +146,15 @@ angular.module('uniAdminApp')
         $rootScope.closeAlert = function(idx) {
             $rootScope._ctx.alerts.splice(idx, 1);
         };
+
+        if ($route.current.params.app === 'wallpaperRanklist') {
+            $scope.getSearchResult = function(query) {
+                return $http.get('/wallpapers/online/api/v1/category/search/' + query + '?start=0&max=60').then(function(resp) {
+                    return resp.data.result;
+                });
+            }
+        }
+
+        // for intro help
+        // $scope.
     });

@@ -6,7 +6,21 @@ var mountFolder = function(connect, dir) {
     'use strict';
     return connect.static(require('path').resolve(dir));
 };
-
+var grunt = require('grunt');
+grunt.file.defaultEncoding = 'utf8';
+var fakeDataMiddleware = function(req, res, next) {
+    if (req.method === 'GET' && /fake/.test(req.url)) {
+        res.writeHead(200, {
+            'Content-Type': 'application/json; charset=utf-8'
+        });
+        var _json = grunt.file.readJSON('./app/fixtures' + req.url, {
+            encoding: 'utf8'
+        });
+        res.end(JSON.stringify(_json));
+    } else {
+        next();
+    }
+};
 // # Globbing
 // for performance reasons we're only matching one level down:
 // 'test/spec/{,*/}*.js'
@@ -76,6 +90,7 @@ module.exports = function(grunt) {
                     middleware: function(connect) {
                         return [
                             require('grunt-connect-proxy/lib/utils').proxyRequest,
+                            fakeDataMiddleware,
                             modRewrite(['!\\.html|\\.js|\\.svg|\\.css|\\.png|\\api.*$ /index.html [L]']),
                             mountFolder(connect, '.tmp'),
                             mountFolder(connect, 'app')
@@ -88,6 +103,11 @@ module.exports = function(grunt) {
                     changeOrigin: true,
                     port: 8983
                 }, {
+                    context: '/wallpapers/api',
+                    host: '192.168.100.36',
+                    changeOrigin: true,
+                    port: 8983
+                }, {
                     context: '/api/v1',
                     host: '192.168.100.38',
                     port: 9190,
@@ -97,6 +117,13 @@ module.exports = function(grunt) {
                     host: '192.168.100.38',
                     port: 8983,
                     changeOrigin: true
+                }, {
+                    context: '/wallpapers/online',
+                    host: 'wallpapers.wandoujia.com',
+                    changeOrigin: true,
+                    rewrite: {
+                        '^/wallpapers/online': ''
+                    }
                 }]
             },
             test: {

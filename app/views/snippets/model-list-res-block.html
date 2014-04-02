@@ -4,7 +4,8 @@
     <div class="col-md-3 col-sm-3 col-xs-4 thumbnail text-center" ng-if="_ctx.currentResource.meta.inlineAdd">
         <h4>添加新资源</h4>
         <pre>Model: {{asyncSelected | json}}</pre>
-        <input type="text" ng-model="asyncSelected" placeholder="Locations loaded via $http" typeahead="ebook.title for ebook in getSearchResult($viewValue) | filter:$viewValue" typeahead-loading="loadingLocations" class="form-control" typeahead-on-select="typeaheadOnSelectHandler($item)">
+        <input type="text" ng-model="asyncSelected" placeholder="通过搜索来快速添加" typeahead="ebook.title for ebook in getSearchResult($viewValue) | filter:$viewValue" typeahead-loading="loadingLocations" class="form-control" typeahead-on-select="typeaheadOnSelectHandler($item)" ng-if="!_ctx.currentApp.meta.typeaheadTemplateUrl">
+        <input type="text" ng-model="asyncSelected" placeholder="通过搜索来快速添加" typeahead="ebook.title for ebook in getSearchResult($viewValue) | filter:$viewValue" typeahead-loading="loadingLocations" class="form-control" typeahead-on-select="typeaheadOnSelectHandler($item)" typeahead-template-url="{{_ctx.currentApp.meta.typeaheadTemplateUrl}}" ng-if="_ctx.currentApp.meta.typeaheadTemplateUrl">
     </div>
     <div class="col-md-3 col-sm-3 col-xs-4 thumbnail" ng-repeat="$item in _list">
           <div class="text-center grid-item res-block-draggable res-block-droppable" drop="dropHandler" id="res-block-{{$index}}">
@@ -16,7 +17,9 @@
             <li class="text-right" ng-repeat="_field in _ctx._fields" ng-switch on="_field.type">
                 <div ng-switch-when="image">
                     <strong class="pull-left">{{_field.name}}:</strong>
-                    <img class="fancybox" ng-src="{{$item | deepKey: {key: _field.key} }}" img-size-alt style="max-height: 124px;">
+                    <span img-tooltip tooltip-url="{{$item | deepKey: {key: _field.key} }}">
+                        <img ng-src="{{$item | deepKey: {key: _field.key} }}" style="max-height: 124px;">
+                    </span>
                 </div>
                 <div ng-switch-default>
                     <div class="btn-group pull-right" ng-if="_field.meta.editable">

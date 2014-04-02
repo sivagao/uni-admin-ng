@@ -1,0 +1,76 @@
+[{
+    "key": "video",
+    "val": "视频",
+    "icon": "fa-flag",
+    "type": "APPLICATION",
+    "children": [{
+        "key": "tv1",
+        "val": "短片",
+        "icon": "fa-flag",
+        "type": "RESOURCE",
+        "meta": {
+            "layout": "inline-block",
+            "inlineAdd": true
+        }
+    }, {
+        "key": "tv2",
+        "val": "电视剧",
+        "icon": "fa-flag",
+        "type": "RESOURCE",
+        "meta": {}
+    }, {
+        "key": "film",
+        "val": "电影",
+        "icon": "fa-flag",
+        "type": "RESOURCE",
+        "meta": {}
+    }]
+}, {
+    "key": "ebook",
+    "val": "电纸书",
+    "icon": "fa-flag",
+    "type": "APPLICATION",
+    "children": [{
+        "key": "tv1",
+        "val": "短片",
+        "icon": "fa-flag",
+        "type": "RESOURCE",
+        "meta": {}
+    }, {
+        "key": "tv2",
+        "val": "电视剧",
+        "icon": "fa-flag",
+        "type": "RESOURCE",
+        "meta": {}
+    }, {
+        "key": "film",
+        "val": "电影",
+        "icon": "fa-flag",
+        "type": "RESOURCE",
+        "meta": {}
+    }]
+}, {
+    "key": "wallpaper",
+    "val": "壁纸",
+    "icon": "fa-flag",
+    "type": "APPLICATION",
+    "children": [{
+        "key": "tv1",
+        "val": "短片",
+        "icon": "fa-flag",
+        "type": "RESOURCE",
+        "meta": {}
+    }, {
+        "key": "tv2",
+        "val": "电视剧",
+        "icon": "fa-flag",
+        "type": "RESOURCE",
+        "meta": {}
+    }, {
+        "key": "film",
+        "val": "电影",
+        "icon": "fa-flag",
+        "type": "RESOURCE",
+        "meta": {}
+    }]
+}]

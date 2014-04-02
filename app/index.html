@@ -140,6 +140,8 @@
     <script type="text/javascript" src="/vendor/xadmin/js/xadmin.page.form.js"></script>
     <!-- end xadmin -->
 
+    <script type="text/javascript" src="/vendor/wtooltip/wtooltip.js"></script>
+
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="/scripts/jquery-helpers.js"></script>
     <script src="/scripts/formly.js"></script>
@@ -150,5 +152,12 @@
     <script src="/scripts/app.js"></script>
     <script src="/scripts/controllers/main.js"></script>
     <!-- endbuild -->
+
+    <script type="text/ng-template" id="wallpapersRanlistSearch.html">
+      <a style="text-align: left;">
+          <img ng-src="{{match.model.thumbnail}}" width="120">
+          <span bind-html-unsafe="match.model.description"></span>
+      </a>
+    </script>
 </body>
 </html>

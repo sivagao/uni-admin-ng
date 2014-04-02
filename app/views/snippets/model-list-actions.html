@@ -9,8 +9,9 @@
       <span class="caret"></span>
     </a>
     <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-        <li><a onclick="$.do_action('delete_selected');"><i class="fa fa-remove"></i>批量删除选中</a></li>
-        <li><a onclick="$.do_action('change_selected');"><i class="fa fa-tasks"></i> 批量修改选中</a></li>
+      <li ng-if="!_batchActions">没有定义批量操作</li>
+      <li class="with_menu_btn" ng-repeat="action in _batchActions" ng-if="_batchActions.length">
+          <a action-handler="{{action.func}}">{{action.name}}</a></li>
     </ul>
     <button ng-click="saveRanklist($event)" class="btn  btn-success">保存</button>
   </div>

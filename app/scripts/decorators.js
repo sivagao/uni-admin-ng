@@ -54,7 +54,7 @@ angular.module('uniAdmin.decorators', [])
                     $rootScope._ctx.alerts.push({
                         type: 'danger',
                         msg: 'error-' + response.status + ': ' +
-                            response.data + ', 接口出问题啦!'
+                            (response.data || '') + ', 接口出问题啦!'
                     });
                     return $q.reject(response);
                 }
