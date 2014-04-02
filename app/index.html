@@ -39,6 +39,8 @@
     <!-- Add fancyBox -->
     <script type="text/javascript" src="/vendor/fancybox/jquery.fancybox.pack.js"></script>
     <link rel="stylesheet" type="text/css" href="/vendor/fancybox/jquery.fancybox.css" media="screen">
+    <link rel="stylesheet" href="/bower_components/intro.js/introjs.css">
+
     <!-- end plugins -->
 
     <!-- build:css({.tmp,app}) styles/main.css -->
@@ -50,7 +52,7 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
     <div top-nav></div>
-    <alert ng-repeat="alert in _ctx.alerts" type="alert.type" close="closeAlert($index)">{{alert.msg}}</alert>
+    <alert ng-repeat="alert in _ctx.alerts" type="alert.type" close="closeAlert($index)"><div ng-bind-html="alert.msg"></div></alert>
     <style type="text/css">
         .alert {
             position: fixed;
@@ -106,6 +108,7 @@
     <script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="/bower_components/angular-route/angular-route.js"></script>
     <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="/bower_components/intro.js/intro.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -140,6 +143,7 @@
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="/scripts/jquery-helpers.js"></script>
     <script src="/scripts/formly.js"></script>
+    <script src="/scripts/intro.js"></script>
     <script src="/scripts/directives/index.js"></script>
     <script src="/scripts/filters.js"></script>
     <script src="/scripts/decorators.js"></script>

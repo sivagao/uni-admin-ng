@@ -92,6 +92,11 @@ module.exports = function(grunt) {
                     host: '192.168.100.38',
                     port: 9190,
                     changeOrigin: true
+                }, {
+                    context: '/ebooks/api/admin/ebook/',
+                    host: '192.168.100.38',
+                    port: 8983,
+                    changeOrigin: true
                 }]
             },
             test: {

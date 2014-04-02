@@ -311,6 +311,21 @@ angular.module('uniAdmin.directives', [
         templateUrl: '/views/snippets/model-list-search.html',
         link: function(scope, elem, attrs) {}
     }
+}).directive('modelListIntro', function($timeout, $rootScope) {
+    return {
+        replace: true,
+        templateUrl: '/views/snippets/model-list-intro.html',
+        link: function(scope, elem, attrs) {
+            $timeout(function() {
+                if ('IntroOptions' in $rootScope._ctx.currentApp.meta) {
+                    scope.IntroOptions = $rootScope._ctx.currentApp.meta.IntroOptions;
+                }
+                if ('IntroOptions' in $rootScope._ctx.currentResource.meta) {
+                    scope.IntroOptions = $rootScope._ctx.currentResource.meta.IntroOptions;
+                }
+            });
+        }
+    }
 }).directive('modelListLayout', function($timeout) {
     return {
         replace: true,
