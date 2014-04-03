@@ -8,6 +8,7 @@ angular.module('uniAdminApp', [
     'uniAdmin.directives',
     'uniAdmin.filters',
     'uniAdmin.decorators',
+    'uniAdmin.services',
     'formly',
     'angular-intro'
 ])
