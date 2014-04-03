@@ -287,11 +287,50 @@ angular.module('uniAdmin.directives', [
         templateUrl: '/views/snippets/model-list-columns.html',
         link: function(scope, elem, attrs) {}
     }
-}).directive('modelListExport', function($timeout) {
+}).directive('modelListExport', function($timeout, $rootScope, downloadFile) {
     return {
         replace: true,
+        scope: true,
         templateUrl: '/views/snippets/model-list-export.html',
-        link: function(scope, elem, attrs) {}
+        link: function(scope, elem, attrs) {
+            var stringifyCell = function(data) {
+                if (typeof data === 'string') {
+                    data = data.replace(/"/g, '""'); // Escape double qoutes
+                    return data;
+                }
+                if (typeof data === 'boolean') {
+                    return data ? 'TRUE' : 'FALSE';
+                }
+                return data;
+            };
+
+            function exportTableToCSV(array, filename) {
+                var csvContent = 'data:text/csv;charset=utf-8,';
+                csvContent += encodeURIComponent(_.map(array, function(row) {
+                    return _.map(row, function(td) {
+                        return stringifyCell(td);
+                    }).join(',');
+                }).join('\r\n'));
+
+                return csvContent;
+            }
+
+            function preExportData() {
+                var head = _.pluck($rootScope._ctx._fields, 'name');
+                var body = _.map($rootScope._ctx._modelData.list, function(row) {
+                    return _.filter(row, function(val, key) {
+                        if (key.indexOf('$$') != 0) {
+                            return val;
+                        }
+                    })
+                });
+                body.unshift(head);
+                return body;
+            }
+            scope.exportCSVHandler = function() {
+                downloadFile(exportTableToCSV.apply(this, [preExportData(), 'export.csv']));
+            };
+        }
     }
 }).directive('modelListBreadcrumb', function($timeout) {
     return {
