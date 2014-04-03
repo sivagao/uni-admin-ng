@@ -162,7 +162,8 @@ angular.module('uniAdminApp', [
             return $http.get('/fake.basefields.js');
         }).then(function(resp) {
             $rootScope._ctx._baseFields = resp.data;
-            $rootScope.$broadcast('metaData:update');
+            $rootScope.$broadcast('metaData:init');
+            $rootScope._ctx._loaded = true;
         });
 
         // formly demo

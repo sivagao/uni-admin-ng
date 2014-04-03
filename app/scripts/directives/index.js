@@ -7,7 +7,7 @@ angular.module('uniAdmin.directives', [
         templateUrl: '/views/snippets/top-nav.html',
         scope: true,
         link: function(scope, elem, attrs) {
-            scope.$on('metaData:update', function() {
+            scope.$on('metaData:init', function() {
                 scope._searches = [];
                 scope._addes = [];
                 _.each($rootScope._ctx._meta, function(item) {
@@ -203,9 +203,10 @@ angular.module('uniAdmin.directives', [
         link: function(scope, elem, attrs) {
             // design data structure
             // key的类型-》 char, daytime, select，foreign-key, number
-            scope.$on('metaData:update', function() {
+            scope.$on('metaData:ml', _update);
+            var _update = function() {
                 scope._fields = $rootScope._ctx._fields;
-            });
+            };
             // filter
             $(document).on('click', '.filter-multiselect input[type=checkbox]', function(e) {
                 window.location.href = $(this).parent().attr('href');
@@ -315,7 +316,7 @@ angular.module('uniAdmin.directives', [
         replace: true,
         templateUrl: '/views/snippets/model-list-intro.html',
         link: function(scope, elem, attrs) {
-            scope.$on('metaData:update', function() {
+            scope.$on('metaData:ml', function() {
                 if ($rootScope._ctx.currentApp.meta && ('IntroOptions' in $rootScope._ctx.currentApp.meta)) {
                     scope.IntroOptions = $rootScope._ctx.currentApp.meta.IntroOptions;
                 }
@@ -367,7 +368,7 @@ angular.module('uniAdmin.directives', [
         replace: true,
         templateUrl: '/views/snippets/model-list-actions.html',
         link: function(scope, elem, attrs) {
-            scope.$on('metaData:update', function() {
+            scope.$on('metaData:ml', function() {
                 // to support extend from app, resource
                 if ($rootScope._ctx.currentApp.meta && $rootScope._ctx.currentApp.meta.batchActions) {
                     scope._batchActions = $rootScope._ctx.currentApp.meta.batchActions;
@@ -388,33 +389,32 @@ angular.module('uniAdmin.directives', [
                     scope.$apply();
                     return false;
                 });
-
-                var action_bar = $('.form-actions');
-                if (action_bar.length) {
-                    var onchange = function() {
-                        var s = (document.body.scrollTop || document.documentElement.scrollTop) + window.innerHeight;
-                        var height = $('#footer').offset().top;
-                        if (s < height) {
-                            action_bar.addClass('fixed');
-                        }
-                        if (s > (height + 50)) {
-                            action_bar.removeClass('fixed');
-                        }
+                var onchange = function() {
+                    var s = (document.body.scrollTop || document.documentElement.scrollTop) + window.innerHeight;
+                    var height = $('#footer').offset().top;
+                    if (s < height) {
+                        elem.show();
                     }
+                    if (s > (height + 50)) {
+                        elem.hide();
+                    }
+                }
+                if (elem.attr('fixed') === 'true') {
+                    elem.addClass('fixed');
                     window.onscroll = _.throttle(onchange, 300);
                     onchange();
+                    if (window.__admin_ismobile__) {
+                        $(window).bind('resize', function(e) {
+                            var rate = $(window).height() / $(window).width();
+                            if (rate < 1) {
+                                elem.css('display', 'none');
+                            } else {
+                                elem.css('display', 'block');
+                            }
+                        });
+                    }
                 }
-                if (window.__admin_ismobile__) {
-                    $(window).bind('resize', function(e) {
-                        var rate = $(window).height() / $(window).width();
-                        var action_bar = $('.form-actions');
-                        if (rate < 1) {
-                            action_bar.css('display', 'none');
-                        } else {
-                            action_bar.css('display', 'block');
-                        }
-                    });
-                }
+
             });
         }
     }
@@ -428,7 +428,7 @@ angular.module('uniAdmin.directives', [
             };
         },
         link: function(scope, elem, attrs) {
-            scope.$on('metaData:update', function() {
+            scope.$on('metaData:ml', function() {
                 scope._fields = $rootScope._ctx._fields;
             });
             $timeout(function() {
@@ -559,10 +559,11 @@ angular.module('uniAdmin.directives', [
         // priority: 100,
         link: function(scope, elem, attrs) {
             elem.wTooltip({
+                className: 'image-tooltip-wrap',
                 delay: 300,
                 offsetX: 50,
                 offsetY: 50,
-                content: "<div style='overflow: auto; height: 100%'><img src=" + attrs['tooltipUrl'] + " alt='bigger image' /></div>"
+                content: "<img src=" + attrs['tooltipUrl'] + " alt='bigger image' />"
             });
         }
     }

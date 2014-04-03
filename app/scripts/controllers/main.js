@@ -7,24 +7,26 @@ angular.module('uniAdminApp')
             'AngularJS',
             'Karma'
         ];
-        $rootScope.$emit('refreshSiteMenu');
+        if ($rootScope._ctx._meta) {
+            $rootScope.$broadcast('siteMenu:refresh');
+        }
     }).controller('ModelListCtrl', function($scope, $rootScope, $route, $timeout, $http) {
 
-        $scope.$on('metaData:update', function() {
+        $scope.$on('metaData:init', function() {
             initCurrentStatus();
         });
-        if ($rootScope._ctx.currentResource) {
+        if ($rootScope._ctx._loaded) {
             initCurrentStatus();
         }
 
         function initCurrentStatus() {
-            $rootScope.$broadcast('siteMenu:refresh');
             $rootScope._ctx.currentApp = _.find($rootScope._ctx._meta, function(item) {
                 return item.key === $route.current.params.app;
             });
             $rootScope._ctx.currentResource = _.find($rootScope._ctx.currentApp.children, function(item) {
                 return item.key === $route.current.params.resource;
             });
+            $rootScope.$broadcast('siteMenu:refresh');
             if (['ebookRanklist', 'wallpaperRanklist'].indexOf($route.current.params.app) > -1) {
                 $rootScope._ctx._modelData = {
                     meta: {},
@@ -46,6 +48,9 @@ angular.module('uniAdminApp')
                     $rootScope._ctx._modelData = resp.data;
                 });
             }
+            $timeout(function() {
+                $rootScope.$broadcast('metaData:ml');
+            });
         }
 
         function processAPIData(type) {
@@ -133,7 +138,22 @@ angular.module('uniAdminApp')
             };
             console.log(_post);
             $(ev.target).html('保存中').prop('disabled', true);
-            $http.get('/ebooks/api/admin/ebook/updateAllRanklist', {
+            var _updateAPI = '';
+            var _post;
+            if ($route.current.params.app === 'ebookRanklist') {
+                _updateAPI = '/ebooks/api/admin/ebook/updateAllRanklist';
+                _post = {
+                    rankName: $route.current.params.resource,
+                    ebookIds: _ids.join(',')
+                };
+            } else {
+                _updateAPI = '/wallpapers/api/admin/wallpaper/updateAllRanklist';
+                _post = {
+                    rankName: $route.current.params.resource,
+                    wallpaperIds: _ids.join(',')
+                };
+            }
+            $http.get(_updateAPI, {
                 params: _post
             }).then(function(resp) {
                 $timeout(function() {

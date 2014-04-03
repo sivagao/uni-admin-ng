@@ -7,6 +7,7 @@ var mountFolder = function(connect, dir) {
     return connect.static(require('path').resolve(dir));
 };
 var grunt = require('grunt');
+var basicAuth = require('basic-auth-connect');
 grunt.file.defaultEncoding = 'utf8';
 var fakeDataMiddleware = function(req, res, next) {
     if (req.method === 'GET' && /fake/.test(req.url)) {
@@ -47,12 +48,12 @@ module.exports = function(grunt) {
 
         // Watches files for changes and runs tasks based on the changed files
         watch: {
+            options: {
+                livereload: 35791
+            },
             js: {
                 files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
-                tasks: ['newer:jshint:all'],
-                options: {
-                    livereload: true
-                }
+                tasks: ['newer:jshint:all']
             },
             jsTest: {
                 files: ['test/spec/{,*/}*.js'],
@@ -67,7 +68,7 @@ module.exports = function(grunt) {
             },
             livereload: {
                 options: {
-                    livereload: '<%= connect.options.livereload %>'
+                    livereload: '<%= connect.options.livereload %>',
                 },
                 files: [
                     '<%= yeoman.app %>/{,*/}*.html',
@@ -80,15 +81,16 @@ module.exports = function(grunt) {
         // The actual grunt server settings
         connect: {
             options: {
-                port: 9000,
+                port: 9100,
                 // Change this to '0.0.0.0' to access the server from outside.
                 hostname: '*',
-                livereload: 35729
+                livereload: 35791
             },
             livereload: {
                 options: {
                     middleware: function(connect) {
                         return [
+                            basicAuth('oscar', 'MjVmOWIyZmVmYzFlNjJmYzNmZmU1NTUzYjgyYTg4OTM='),
                             require('grunt-connect-proxy/lib/utils').proxyRequest,
                             fakeDataMiddleware,
                             modRewrite(['!\\.html|\\.js|\\.svg|\\.css|\\.png|\\api.*$ /index.html [L]']),
@@ -103,19 +105,21 @@ module.exports = function(grunt) {
                     changeOrigin: true,
                     port: 8983
                 }, {
+                    context: '/xxx/ebooks/api',
+                    host: 'ebooks.wandoujia.com',
+                    changeOrigin: true,
+                    port: 8983,
+                    rewrite: {
+                        '^/ebooks': ''
+                    }
+                }, {
                     context: '/wallpapers/api',
                     host: '192.168.100.36',
                     changeOrigin: true,
                     port: 8983
                 }, {
                     context: '/api/v1',
-                    host: '192.168.100.38',
-                    port: 9190,
-                    changeOrigin: true
-                }, {
-                    context: '/ebooks/api/admin/ebook/',
-                    host: '192.168.100.38',
-                    port: 8983,
+                    host: 'ebooks.wandoujia.com',
                     changeOrigin: true
                 }, {
                     context: '/wallpapers/online',
