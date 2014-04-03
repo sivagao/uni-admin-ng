@@ -281,11 +281,45 @@ angular.module('uniAdmin.directives', [
             }
         }
     }
-}).directive('modelListColumns', function($timeout) {
+}).directive('modelListColumns', function($timeout, $rootScope) {
     return {
         replace: true,
+        scope: true,
         templateUrl: '/views/snippets/model-list-columns.html',
-        link: function(scope, elem, attrs) {}
+        link: function(scope, elem, attrs) {
+            var flatten = function(item) {
+                return _.map(item, function(val, key) {
+                    if (_.isObject(val)) {
+                        return _.map(flatten(val), function(i) {
+                            return key + '.' + i;
+                        });
+                    }
+                    return key;
+                });
+            };
+            scope.toggleSelect = function(_field) {
+                _field.selected = !_field.selected;
+            };
+            $rootScope.$watch('_ctx._modelData.list', function(val) {
+                if (val) {
+                    // fix nested key!!
+                    scope._fields = _.map(_.flatten(flatten($rootScope._ctx._modelData.list[0])), function(item) {
+                        return {
+                            name: item,
+                            selected: (item in _.pluck($rootScope._ctx._fields, 'key'))
+                        }
+                    });
+                }
+            }, true);
+            $timeout(function() {
+                scope._fields = _.map(_.flatten(flatten($rootScope._ctx._modelData.list[0])), function(item) {
+                    return {
+                        name: item,
+                        selected: (_.pluck($rootScope._ctx._fields, 'key').indexOf(item) > -1)
+                    }
+                });
+            }, 1000);
+        }
     }
 }).directive('modelListExport', function($timeout, $rootScope, downloadFile) {
     return {
@@ -522,7 +556,7 @@ angular.module('uniAdmin.directives', [
         scope: true,
         link: function(scope, elem, attrs) {
 
-            $rootScope.$watch('_ctx._modelData', function(val) {
+            $rootScope.$watch('_ctx._modelData.list', function(val) {
                 if (val) {
                     scope._list = $rootScope._ctx._modelData.list;
                     $timeout(function() {
@@ -537,13 +571,6 @@ angular.module('uniAdmin.directives', [
                             }
                             scope.$apply();
                             return false;
-                            // call the passed drop function
-                            // scope.$apply(function(scope) {
-                            //     var fn = scope.drop();
-                            //     if ('undefined' !== typeof fn) {
-                            //         fn(srcId, destId);
-                            //     }
-                            // });
                         });
                         var maxItemHeight = 0;
                         elem.find('.thumbnail').each(function(idx, item) {
