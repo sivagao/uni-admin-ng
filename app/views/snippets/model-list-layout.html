@@ -4,8 +4,8 @@
         <i class="fa fa-table"></i> 布局 <span class="caret"></span>
       </a>
       <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-          <li><a href="?_layout=thumbnails"><i class="fa fa-th-large"></i> 图标</a></li>
-          <li class="active"><a href="?_layout=table"><i class="fa fa-table"></i> 表格</a></li>
+          <li ng-class="{'active': _ctx.currentResource.meta.layout=='inline-block'}"><a ng-click="changeLayout('inline-block')"><i class="fa fa-th-large"></i> 图标</a></li>
+          <li ng-class="{'active': _ctx.currentResource.meta.layout!='inline-block'}"><a ng-click="changeLayout('table')"><i class="fa fa-table"></i> 表格</a></li>
       </ul>
     </div>
     <div class="btn-group layout-btns" data-toggle="buttons">

@@ -4,7 +4,7 @@
     </td>
     <td ng-repeat="_field in _ctx._fields" ng-switch on="_field.type">
         <div ng-switch-when="image">
-            <img src="{{$item[_field.key]}}" img-size-alt>
+            <img src="{{$item | deepKey: {key: _field.key} }}" img-size-alt>
         </div>
         <div ng-switch-default>
             <div class="btn-group pull-right">
@@ -13,7 +13,7 @@
             <a href="" ng-if="_field.linkable">
                 <span class="editable-field">{{$item[_field.key]}}</span>
             </a>
-            <span class="editable-field" ng-if="!_field.linkable">{{$item[_field.key]}}</span>
+            <span class="editable-field" ng-if="!_field.linkable">{{$item | deepKey: {key: _field.key} }}</span>
         </div>
     </td>
 </tr>

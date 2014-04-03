@@ -26,7 +26,7 @@
                         <a model-list-editable data-original-title="输入{{_field.name}}"><i class="fa fa-edit"></i></a>
                     </div>
                     <strong class="pull-left">{{_field.name}}:</strong>
-                    <span class="editable-field">{{$item[_field.key] | fixLength: {item: _field} }}</span>
+                    <span class="editable-field">{{$item | deepKey: {key: _field.key} | fixLength: {item: _field} }}</span>
                 </div>
             </li>
             <li class="text-right">

@@ -326,11 +326,15 @@ angular.module('uniAdmin.directives', [
             });
         }
     }
-}).directive('modelListLayout', function($timeout) {
+}).directive('modelListLayout', function($timeout, $rootScope) {
     return {
         replace: true,
+        scope: true,
         templateUrl: '/views/snippets/model-list-layout.html',
         link: function(scope, elem, attrs) {
+            scope.changeLayout = function(type) {
+                $rootScope._ctx.currentResource.meta.layout = type;
+            };
             $timeout(function() {
                 //full screen btn
                 $('.layout-btns .layout-full').click(function(e) {
