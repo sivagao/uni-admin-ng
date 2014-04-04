@@ -12,7 +12,7 @@
   <ul id="g-add-menu" class="dropdown-menu" role="menu">
     <li ng-repeat="_add in _addes">
       <a data-action="{{_add.url}}">
-        <i class="fa fa-search"></i> 增加 {{_add.name}}}</a>
+        <i class="fa fa-search"></i> 增加 {{_add.name}}</a>
     </li>
     <!-- 特殊的： 用户小组件， 书签等 -->
   </ul>
@@ -51,41 +51,3 @@
 
     </div>
   </div>
-<!--
-<li class="dropdown g-setlang">
-  <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#">
-  <i class="fa fa-globe fa fa-white"></i> <span class="hide-sm">
-    简体中文
-    <i class="caret"></i></span></a>
-  <form id="setlang-form" action="/i18n/setlang/" method="post" style="display:none;">
-    <input type='hidden' name='csrfmiddlewaretoken' value='KSc9qzyeptn0v2BFCbiy60AL7iAdYHG9' />
-    <input name="next" type="hidden" value="/" />
-    <input id="setlang-id_language" name="language" type="hidden" value="zh-cn" />
-  </form>
-  <ul id="g-setlang-menu" class="dropdown-menu" role="menu">
-
-      <li><a data-lang="lt"><i class="fa fa-flag"></i> Lietuviškai (lt)</a></li>
-
-      <li><a data-lang="nl"><i class="fa fa-flag"></i> Nederlands (nl)</a></li>
-
-      <li><a data-lang="pl"><i class="fa fa-flag"></i> polski (pl)</a></li>
-
-      <li><a data-lang="pt"><i class="fa fa-flag"></i> Português (pt)</a></li>
-
-      <li class="active"><a data-lang="zh-cn"><i class="fa fa-flag"></i> 简体中文 (zh-cn)</a></li>
-
-  </ul>
-</li>
-<script type="text/javascript">
-  $(function(){
-    $('#g-setlang-menu a').click(function(e){
-      var lang = $(this).data('lang');
-      $('#setlang-form #setlang-id_language').attr('value', lang);
-      $('#setlang-form').submit();
-
-      var topmenu = $('#top-nav .navbar-collapse');
-      if(topmenu.data('bs.collapse')) topmenu.collapse('hide');
-    })
-  })
-</script>
- -->

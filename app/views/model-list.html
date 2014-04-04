@@ -1,7 +1,7 @@
 
-<div model-list-breadcrumb></div>
+<div model-list-breadcrumb ng-hide="_ctx.currentApp.meta.hideBreadcrumb"></div>
 
-<div content-navbar>
+<div content-navbar ng-hide="_ctx.currentApp.meta.hideContentNavBar">
     <div class="navbar content-navbar navbar-default navbar-xs" data-toggle="breakpoint"
       data-class-xs="navbar content-navbar navbar-inverse navbar-xs"
       data-class-sm="navbar content-navbar navbar-default navbar-xs">

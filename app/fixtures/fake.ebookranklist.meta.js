@@ -22,6 +22,8 @@
                 "position": "right"
             }]
         },
+        "hideBreadcrumb": true,
+        "hideContentNavBar": true,
         "batchActions": [{
             "name": "批量删除选中",
             "func": "deleteBatchHandler"

@@ -26,6 +26,8 @@
                 "position": "right"
             }]
         },
+        "hideBreadcrumb": true,
+        "hideContentNavBar": true,
         "typeaheadTemplateUrl": "wallpapersRanlistSearch.html",
         "batchActions": [{
             "name": "批量删除选中",
