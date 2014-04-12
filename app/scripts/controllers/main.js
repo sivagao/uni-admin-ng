@@ -2,14 +2,12 @@
 
 angular.module('uniAdminApp')
     .controller('homeCtrl', function($scope, $rootScope, $route, $timeout, $http) {
-        $scope.awesomeThings = [
-            'HTML5 Boilerplate',
-            'AngularJS',
-            'Karma'
-        ];
         if ($rootScope._ctx._meta) {
             $rootScope.$broadcast('siteMenu:refresh');
         }
+        $http.get('/views/README.md').then(function(resp) {
+            $scope.markReadMe = resp.data;
+        });
     }).controller('ModelListCtrl', function($scope, $rootScope, $route, $timeout, $http) {
 
         $scope.$on('metaData:init', function() {

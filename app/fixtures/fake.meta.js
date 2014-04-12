@@ -1,12 +1,12 @@
 [{
     "key": "video",
     "val": "视频",
-    "icon": "fa-flag",
+    "icon": "fa-film",
     "type": "APPLICATION",
     "children": [{
         "key": "tv1",
         "val": "短片",
-        "icon": "fa-flag",
+        "icon": "fa-film",
         "type": "RESOURCE",
         "meta": {
             "layout": "inline-block",
@@ -28,7 +28,7 @@
 }, {
     "key": "ebook",
     "val": "电纸书",
-    "icon": "fa-flag",
+    "icon": "fa-book",
     "type": "APPLICATION",
     "children": [{
         "key": "tv1",
@@ -52,7 +52,7 @@
 }, {
     "key": "wallpaper",
     "val": "壁纸",
-    "icon": "fa-flag",
+    "icon": "fa-picture-o",
     "type": "APPLICATION",
     "children": [{
         "key": "tv1",

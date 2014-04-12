@@ -93,7 +93,7 @@ module.exports = function(grunt) {
                             basicAuth('oscar', 'MjVmOWIyZmVmYzFlNjJmYzNmZmU1NTUzYjgyYTg4OTM='),
                             require('grunt-connect-proxy/lib/utils').proxyRequest,
                             fakeDataMiddleware,
-                            modRewrite(['!\\.html|\\.js|\\.svg|\\.css|\\.png|\\api.*$ /index.html [L]']),
+                            modRewrite(['!\\.html|\\.js|\\.md|\\.svg|\\.css|\\.png|\\api.*$ /index.html [L]']),
                             mountFolder(connect, '.tmp'),
                             mountFolder(connect, 'app')
                         ];

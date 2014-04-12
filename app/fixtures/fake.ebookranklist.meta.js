@@ -1,7 +1,7 @@
 {
     "key": "ebookRanklist",
     "val": "电子书排行榜",
-    "icon": "fa-flag",
+    "icon": "fa-sort-amount-desc",
     "type": "APPLICATION",
     "meta": {
         "IntroOptions": {

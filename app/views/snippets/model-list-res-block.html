@@ -9,7 +9,7 @@
     </div>
     <div class="col-md-3 col-sm-3 col-xs-4 thumbnail" ng-repeat="$item in _list">
           <div class="text-center grid-item res-block-draggable res-block-droppable" drop="dropHandler" id="res-block-{{$index}}">
-            <h1><i class="fa fa-laptop"></i></h1>
+            <h1><i class="fa" ng-class="_ctx.currentApp.icon"></i></h1>
             <ul class="list-unstyled">
             <li class="text-right">
                 <input class="action-select" type="checkbox">

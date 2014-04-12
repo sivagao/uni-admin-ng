@@ -11,7 +11,8 @@ angular.module('uniAdminApp', [
     'uniAdmin.services',
     'formly',
     'angular-intro',
-    'chieffancypants.loadingBar'
+    'chieffancypants.loadingBar',
+    'btford.markdown'
 ])
     .config(function($routeProvider, $locationProvider) {
         $locationProvider.html5Mode(true);

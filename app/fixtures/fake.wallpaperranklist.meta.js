@@ -1,7 +1,7 @@
 {
     "key": "wallpaperRanklist",
     "val": "壁纸排行榜",
-    "icon": "fa-flag",
+    "icon": "fa-sort-alpha-asc",
     "type": "APPLICATION",
     "meta": {
         "IntroOptions": {
