@@ -10,7 +10,8 @@ angular.module('uniAdminApp', [
     'uniAdmin.decorators',
     'uniAdmin.services',
     'formly',
-    'angular-intro'
+    'angular-intro',
+    'chieffancypants.loadingBar'
 ])
     .config(function($routeProvider, $locationProvider) {
         $locationProvider.html5Mode(true);
