@@ -20,7 +20,8 @@
     <script type="text/javascript" src="/vendor/jsi18n.js"></script>
     <link href="/vendor/bootstrap/css/bootstrap.css" type="text/css" media="screen" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" id="site-theme" href="/vendor/xadmin/css/themes/bootstrap-xadmin.css" />
+    <!-- <link rel="stylesheet" type="text/css" id="site-theme" href="/vendor/xadmin/css/themes/bootstrap-xadmin.css" /> -->
+    <link rel="stylesheet" type="text/css" id="site-theme" href="/vendor/xadmin/css/themes/lumen.min.css" />
 
     <link href="/vendor/font-awesome/css/font-awesome.css" type="text/css" media="screen" rel="stylesheet" />
     <link href="/vendor/xadmin/css/xadmin.main.css" type="text/css" media="screen" rel="stylesheet" />
@@ -160,7 +161,7 @@
 
     <script type="text/ng-template" id="wallpapersRanlistSearch.html">
       <a style="text-align: left;">
-          <img ng-src="{{match.model.thumbnail}}" width="120">
+          <img ng-src="{{match.model.thumbnail}}" width="120" style="display: inline">
           <span bind-html-unsafe="match.model.description"></span>
       </a>
     </script>
