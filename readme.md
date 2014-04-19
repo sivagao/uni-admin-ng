@@ -1,7 +1,5 @@
 # Uni-Admin by Angular.js and API
 
-![截图展示 - model-list](http://img.wdjimg.com/uni-admin/QQ20140329-5.png)
-
 ## list API，item API， meta API， miscAPI
 
  - list API的注意点是很好的支持分页
@@ -80,3 +78,8 @@ FileInput,ClearableFileInput
 
 Composite widgets
 MultipleHiddenInput,SplitDateTimeWidget,SplitHiddenDateTimeWidget,SelectDateWidget
+
+
+![截图展示 - model-list](http://img.wdjimg.com/uni-admin/QQ20140416-1.png)
+![截图展示 - home](http://img.wdjimg.com/uni-admin/QQ20140419-1.png)
+![截图展示 - pickup](http://img.wdjimg.com/uni-admin/QQ20140419-2.png)
