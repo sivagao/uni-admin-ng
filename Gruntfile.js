@@ -105,18 +105,10 @@ module.exports = function(grunt) {
                     changeOrigin: true,
                     port: 8983
                 }, {
-                    context: '/xxx/ebooks/api',
-                    host: 'ebooks.wandoujia.com',
+                    context: '/wallpapers/api/',
+                    host: '60.29.246.10', //'192.168.100.36',
                     changeOrigin: true,
-                    port: 8983,
-                    rewrite: {
-                        '^/ebooks': ''
-                    }
-                }, {
-                    context: '/wallpapers/api',
-                    host: '192.168.100.36',
-                    changeOrigin: true,
-                    port: 8983
+                    port: 9506 // 8983,
                 }, {
                     context: '/api/v1',
                     host: 'ebooks.wandoujia.com',

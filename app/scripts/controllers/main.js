@@ -61,7 +61,7 @@ angular.module('uniAdminApp')
                     API_PREFIX = '/ebooks/api/v1';
                     break;
                 case 'wallpaperRanklist':
-                    API_PREFIX = '/wallpapers/api/v1';
+                    API_PREFIX = '/wallpapers/api/admin/wallpaper';
                     break;
             }
             $http.get(API_PREFIX + '/ranklist', {
@@ -167,7 +167,7 @@ angular.module('uniAdminApp')
 
         if ($route.current.params.app === 'wallpaperRanklist') {
             $scope.getSearchResult = function(query) {
-                return $http.get('/wallpapers/online/api/v1/category/search/' + query + '?start=0&max=60').then(function(resp) {
+                return $http.get('/wallpapers/online/api/v1/search/' + query).then(function(resp) {
                     return resp.data.result;
                 });
             }

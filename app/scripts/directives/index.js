@@ -287,6 +287,7 @@ angular.module('uniAdmin.directives', [
         scope: true,
         templateUrl: '/views/snippets/model-list-columns.html',
         link: function(scope, elem, attrs) {
+            var _restoreFields;
             var flatten = function(item) {
                 return _.map(item, function(val, key) {
                     if (_.isObject(val)) {
@@ -297,8 +298,19 @@ angular.module('uniAdmin.directives', [
                     return key;
                 });
             };
+            var checkFieldType = function(val) {
+                if (_.isString(val)) {
+                    if ((val.indexOf('image') > -1) && (val.indexOf('http') > -1)) {
+                        return 'image';
+                    }
+                }
+                return 'char';
+            };
             scope.toggleSelect = function(_field) {
                 _field.selected = !_field.selected;
+            };
+            scope.restoreHandler = function() {
+                $rootScope._ctx._fields = _restoreFields;
             };
             $rootScope.$watch('_ctx._modelData.list', function(val) {
                 if (val) {
@@ -318,6 +330,21 @@ angular.module('uniAdmin.directives', [
                         selected: (_.pluck($rootScope._ctx._fields, 'key').indexOf(item) > -1)
                     }
                 });
+                _restoreFields = $rootScope._ctx._fields;
+                scope.$watch('_fields', function(val) {
+                    if (val) {
+                        var _selected = _.filter(val, function(item) {
+                            return item.selected === true;
+                        });
+                        $rootScope._ctx._fields = _.map(_selected, function(item) {
+                            var type = checkFieldType(eval('$rootScope._ctx._modelData.list[0]' + '.' + item.name));
+                            return _.extend(item, {
+                                type: type,
+                                key: item.name
+                            });
+                        });
+                    }
+                }, true);
             }, 1000);
         }
     }

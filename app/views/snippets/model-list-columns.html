@@ -3,7 +3,7 @@
     <i class="fa fa-list-alt"></i> 列 <span class="caret"></span>
   </a>
   <ul class="dropdown-menu model_fields pull-right" role="menu" aria-labelledby="dLabel">
-    <li><a href="?_layout=table"><i class="fa fa-refresh"></i> 恢复显示列</a></li>
+    <li><a ng-click="restoreHandler()"><i class="fa fa-refresh"></i> 恢复显示列</a></li>
     <li class="divider"></li>
     <li ng-repeat="_field in _fields">
       <a ng-if="!_field.selected" ng-click="toggleSelect(_field)"><i class="fa fa-blank"></i>{{_field.name}}</a>
