@@ -56,7 +56,7 @@ angular.module('uniAdmin.directives', [
                 href: 'http://bootswatch.com/journal/bootstrap.min.css'
             }, {
                 name: 'Lumen',
-                href: 'http://bootswatch.com/lumen/bootstrap.min.css'
+                href: '/vendor/xadmin/css/themes/lumen.min.css'
             }, {
                 name: 'Simplex',
                 href: 'http://bootswatch.com/simplex/bootstrap.min.css'
