@@ -31,6 +31,9 @@ angular.module('uniAdminApp', [
                 templateUrl: '/views/model-list.html',
                 controller: 'AppCtrl'
             })
+            .when('/form', {
+                templateUrl: '/views/form.html'
+            })
             .when('/#:partial', {
                 controller: noop // TO FIX
             })
