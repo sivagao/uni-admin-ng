@@ -4,10 +4,11 @@
         "submitCopy": "Save"
     },
     "formFields": [{
-        "label": "封面",
-        "key": "cover",
-        "type": "input",
-        "placeholder": "http://weibo.com/1siva",
+        "label": "电子邮箱",
+        "key": "email",
+        "type": "email",
+        "placeholder": "janedoe@gmail.com",
+        "defaultVal": "ghld@126.com",
         "validate": {
             "required": true,
             "maxlength": 10
@@ -17,10 +18,13 @@
             "xrequired": "必填项",
             "maxlength": "最长长度超过了",
             "pattern": "pattern不正确"
+        },
+        "attr": {
+            "dynamicAttr": "value-for"
         }
     }, {
-        "label": "片名",
-        "key": "videoTitle",
+        "label": "textarea控件",
+        "key": "textarea",
         "type": "textarea",
         "attr": {
             "text-area-elastic": true,
@@ -39,29 +43,34 @@
         }
     }, {
         "type": "select",
-        "label": "电影类型",
-        "key": "videoType",
-        "info": "请选择电影类型",
+        "label": "select控件",
+        "key": "vehicle",
+        "info": "请选择交通工具",
         "options": [{
-            "name": "type1",
-            "value": "搞笑"
+            "name": "Car",
+            "value": "car",
+            "group": "inefficiently"
         }, {
             "name": "Helicopter",
-            "value": "喜剧"
+            "group": "inefficiently"
         }, {
             "name": "Sport Utility Vehicle",
-            "value": "动作"
+            "group": "inefficiently"
         }, {
             "name": "Bicycle",
-            "value": "动作"
+            "group": "efficiently"
         }, {
             "name": "Skateboard",
-            "value": "爱情"
+            "group": "efficiently"
         }]
     }, {
-        "type": "input",
-        "label": "发行时间",
-        "key": "publishDate"
+        "type": "password",
+        "label": "Password",
+        "key": "password"
+    }, {
+        "type": "checkbox",
+        "label": "Check this here",
+        "key": "checkbox1"
     }, {
         "type": "hidden",
         "default": "secret_code",

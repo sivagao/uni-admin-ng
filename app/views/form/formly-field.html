@@ -1,0 +1,13 @@
+<div inputfield labeltext="{{options.label}}" labelfor="{{options.key}}" ng-switch on="options.type">
+    {{options.required ? '*' : ''}}
+    <input ng-switch-default
+        type="{{options.type || 'text'}}"
+        class="pmt-form-width-large"
+        id="{{options.key}}">
+    <!-- opt.name group by opt.group for opt in options.options -->
+    <select ng-options="opt.name for opt in options.options" ng-switch-when="select">
+        <option value="" ng-if="options.nullText">-- {{options.nullText}} --</option>
+    </select>
+    <textarea ng-switch-when="textarea"></textarea>
+    <div message for="{{options.key}}"></div>
+</div>

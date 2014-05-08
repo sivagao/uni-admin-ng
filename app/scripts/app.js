@@ -37,7 +37,8 @@ angular.module('uniAdminApp', [
             .otherwise({
                 redirectTo: '/'
             });
-    }).run(function($rootScope, $timeout, $modal, $http) {
+    })
+    .run(function($rootScope, $timeout, $modal, $http) {
         $timeout(function() {
             (function($) {
                 $.fn.exform = function() {
@@ -182,11 +183,6 @@ angular.module('uniAdminApp', [
         $rootScope.openFormlyModal = function() {
             var modalInstance = $modal.open({
                 templateUrl: 'myModalContent.html',
-                resolve: {
-                    items: function() {
-                        return $scope.items;
-                    }
-                }
             });
             modalInstance.result.then(function(selectedItem) {
                 $rootScope.selected = selectedItem;

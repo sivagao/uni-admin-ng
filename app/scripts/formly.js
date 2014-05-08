@@ -9,7 +9,7 @@ angular.module('formly.render').directive('formlyField', [
     '$templateCache',
     function formlyField($http, $compile, $templateCache) {
         var getTemplateUrl = function(type) {
-            var templateUrl = 'directives/formly-field.html';
+            var templateUrl = '/views/form/formly-field.html';
             return templateUrl;
         };
         return {
@@ -79,7 +79,7 @@ angular.module('formly.render').directive('formlyForm', [
     function formlyForm($compile) {
         return {
             restrict: 'AE',
-            templateUrl: 'directives/formly-form.html',
+            templateUrl: '/views/form/formly-form.html',
             replace: true,
             scope: true,
             link: function($scope, $elem, $attr) {
@@ -92,14 +92,14 @@ angular.module('formly.render').directive('formlyForm', [
         };
     }
 ]);
-angular.module('formly.render').run([
-    '$templateCache',
-    function($templateCache) {
-        'use strict';
-        $templateCache.put('directives/formly-field.html', '<div inputfield="" labeltext={{options.label}} labelfor={{options.key}} ng-switch="" on=options.type>{{options.required ? \'*\' : \'\'}}<input ng-switch-default="" type="{{options.type || \'text\'}}" class=pmt-form-width-large id={{options.key}}><select ng-options="opt.name for opt in options.options" ng-switch-when=select><option value="" ng-if=options.nullText>-- {{options.nullText}} --</option></select><textarea ng-switch-when=textarea></textarea><div message="" for={{options.key}}></div></div>');
-        $templateCache.put('directives/formly-form.html', '<form class="formly pmt-form pmt-form-horizontal" novalidate><formly-field ng-repeat="field in fields" options=field class=formly-field></formly-field><button type=submit ng-hide=options.hideSubmit ng-click=populateResult()>{{options.submitCopy || "Submit"}}</button></form>');
-    }
-]);
+// angular.module('formly.render').run([
+//     '$templateCache',
+//     function($templateCache) {
+//         'use strict';
+//         $templateCache.put('directives/formly-field.html', '<div inputfield="" labeltext={{options.label}} labelfor={{options.key}} ng-switch="" on=options.type>{{options.required ? \'*\' : \'\'}}<input ng-switch-default="" type="{{options.type || \'text\'}}" class=pmt-form-width-large id={{options.key}}><select ng-options="opt.name for opt in options.options" ng-switch-when=select><option value="" ng-if=options.nullText>-- {{options.nullText}} --</option></select><textarea ng-switch-when=textarea></textarea><div message="" for={{options.key}}></div></div>');
+//         $templateCache.put('directives/formly-form.html', '<form class="formly pmt-form pmt-form-horizontal" novalidate><formly-field ng-repeat="field in fields" options=field class=formly-field></formly-field><button type=submit ng-hide=options.hideSubmit ng-click=populateResult()>{{options.submitCopy || "Submit"}}</button></form>');
+//     }
+// ]);
 
 
 // fix - terrible!!

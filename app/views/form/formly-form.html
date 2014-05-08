@@ -1,0 +1,11 @@
+<form class="formly exform rended" novalidate>
+    <formly-field ng-repeat="field in fields"
+                  options="field"
+                  class="formly-field">
+    </formly-field>
+    <button class="btn btn-default" type="submit"
+            ng-hide="options.hideSubmit"
+            ng-click="populateResult()">
+        {{options.submitCopy || "Submit"}}
+    </button>
+</form>
